@@ -1,0 +1,377 @@
+<title>變數與判斷式</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-raised:#FFFFFF;
+    --tab-bg:#F3F4F1;
+    --ink:#1C2321;
+    --ink-soft:#5B665F;
+    --accent:#3A6B8A;
+    --accent-soft:#DCE6EA;
+    --line:#D7DBD1;
+    --shadow:rgba(28,35,33,0.08);
+    --code-bg:#21252B;
+    --code-ink:#ABB2BF;
+    --code-k:#C678DD;
+    --code-s:#98C379;
+    --code-fn:#E5A575;
+    --code-nu:#D19A66;
+    --code-c:#5C6370;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Sans 3', -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-size:16px;
+    padding:0 16px;
+    line-height:1.65;
+  }
+  .page{
+    max-width:820px;
+    margin:0 auto;
+    padding-block:36px 60px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .eyebrow{
+    font-family:'Barlow Semi Condensed', sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .masthead{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding-bottom:22px;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead h1{
+    font-family:'Barlow Semi Condensed', sans-serif;
+    font-weight:700;
+    font-size:clamp(2rem, 6vw, 2.7rem);
+    margin:0;
+    letter-spacing:0.01em;
+    text-wrap:balance;
+  }
+  .masthead .subtitle{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    max-width:60ch;
+  }
+  .meta-row{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  .quicknav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .quicknav a{
+    font-family:'Barlow Semi Condensed', sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    letter-spacing:0.04em;
+    text-decoration:none;
+    color:var(--ink);
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 14px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .quicknav a:hover{ border-color:var(--accent); color:var(--accent); }
+
+  section.unit{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-left:4px solid var(--accent);
+    border-radius:10px;
+    padding:26px clamp(18px,4vw,30px);
+    box-shadow:0 1px 2px var(--shadow);
+    scroll-margin-top:16px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .unit-tab{
+    font-family:'Barlow Semi Condensed', sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .unit h2{
+    font-family:'Barlow Semi Condensed', sans-serif;
+    font-size:1.3rem;
+    font-weight:700;
+    margin:0;
+  }
+  .unit p{ margin:0; }
+  .unit ul{ margin:0; padding-left:1.2em; display:flex; flex-direction:column; gap:6px; }
+  .note{
+    font-size:0.98rem;
+    color:var(--ink-soft);
+    background:var(--accent-soft);
+    border-radius:8px;
+    padding:10px 14px;
+  }
+
+  .field-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+  .code-field{
+    border-radius:9px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .code-field .file-tab{
+    background:var(--tab-bg);
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    padding:8px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .file-tab .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none; }
+  .code-field pre{
+    margin:0;
+    background:var(--code-bg);
+    color:var(--code-ink);
+    padding:18px clamp(14px,3vw,22px);
+    overflow-x:auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1rem;
+    line-height:1.7;
+  }
+  .k{ color:var(--code-k); }
+  .s{ color:var(--code-s); }
+  .fn{ color:var(--code-fn); }
+  .nu{ color:var(--code-nu); }
+  .c{ color:var(--code-c); }
+
+  footer{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:1rem;
+    padding-top:10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="eyebrow">Lecture Handout</div>
+    <h1>變數與判斷式</h1>
+    <p class="subtitle">本週課程重點整理：變數、常數、比較運算子、條件判斷與字串格式化，每一段附上對應的範例程式。</p>
+    <div class="meta-row">整理自本週課堂 Spyder 練習（1-1.py、2-2.py、2-3-0.py、untitled0.py）</div>
+  </header>
+
+  <nav class="quicknav">
+    <a href="#u1">01 變數</a>
+    <a href="#u2">02 常數</a>
+    <a href="#u3">03 命名規則</a>
+    <a href="#u4">04 = 與 ==</a>
+    <a href="#u5">05 輸入與轉型</a>
+    <a href="#u6">06 if/elif/else</a>
+    <a href="#u7">07 and/or</a>
+    <a href="#u8">08 字串數字相加</a>
+    <a href="#u9">09 f-string</a>
+  </nav>
+
+  <section id="u1" class="unit">
+    <div class="unit-tab">01</div>
+    <h2>變數是什麼</h2>
+    <p>變數就像幫記憶體裡的一份資料取個名字，之後要用這份資料，直接呼叫名字就好。用 <code style="color:var(--ink);background:var(--accent-soft);padding:1px 6px;border-radius:4px;font-family:'IBM Plex Mono',monospace;">=</code> 把右邊的值存進左邊的變數名稱；同一個變數之後可以重新賦值，新值會蓋掉舊值。</p>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>1-1.py</div>
+      <pre>a = <span class="nu">1</span>
+b = <span class="nu">2</span>
+c = a + <span class="nu">1</span>
+
+<span class="fn">print</span>( a, b, c )</pre>
+    </div>
+  </section>
+
+  <section id="u2" class="unit">
+    <div class="unit-tab">02</div>
+    <h2>常數的命名慣例</h2>
+    <p>Python 沒有真正「禁止修改」的常數語法。大家的慣例是把不打算再更動的值，用全大寫命名，提醒自己（跟合作的人）這個值不要去動它。</p>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>參考範例</div>
+      <pre><span class="c"># 全大寫 = 這是慣例上的常數，不要去改它</span>
+TAX_RATE = <span class="nu">0.05</span>
+MAX_SCORE = <span class="nu">100</span>
+
+price = <span class="nu">500</span>
+<span class="fn">print</span>( price * (<span class="nu">1</span> + TAX_RATE) )</pre>
+    </div>
+  </section>
+
+  <section id="u3" class="unit">
+    <div class="unit-tab">03</div>
+    <h2>變數命名規則</h2>
+    <ul>
+      <li>只能用字母、數字、底線 <code style="font-family:'IBM Plex Mono',monospace;">_</code>，而且不能用數字開頭</li>
+      <li>大小寫是不同的變數（大小寫敏感）</li>
+      <li>不能用 Python 保留字（像 <code style="font-family:'IBM Plex Mono',monospace;">if</code>、<code style="font-family:'IBM Plex Mono',monospace;">for</code>、<code style="font-family:'IBM Plex Mono',monospace;">class</code>）當變數名稱</li>
+      <li>建議用蛇式命名法：單字全小寫，中間用底線連接，例如 <code style="font-family:'IBM Plex Mono',monospace;">student_name</code></li>
+    </ul>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>參考範例</div>
+      <pre>student_name = <span class="s">"小美"</span>
+Student_Name = <span class="s">"阿明"</span>
+
+<span class="fn">print</span>( student_name )
+<span class="fn">print</span>( Student_Name )
+
+<span class="c"># 3name = "錯誤示範"   -&gt; SyntaxError，不能用數字開頭</span>
+<span class="c"># if = 10              -&gt; SyntaxError，if 是保留字</span></pre>
+    </div>
+  </section>
+
+  <section id="u4" class="unit">
+    <div class="unit-tab">04</div>
+    <h2>賦值 <code style="font-family:'IBM Plex Mono',monospace;">=</code> 與比較 <code style="font-family:'IBM Plex Mono',monospace;">==</code></h2>
+    <p>一個等號 <code style="font-family:'IBM Plex Mono',monospace;">=</code> 是「動作」，把右邊的值存進左邊的變數。兩個等號 <code style="font-family:'IBM Plex Mono',monospace;">==</code> 是「提問」，問左右兩邊是不是相等，結果只會是 <code style="font-family:'IBM Plex Mono',monospace;">True</code> 或 <code style="font-family:'IBM Plex Mono',monospace;">False</code>，通常寫在 <code style="font-family:'IBM Plex Mono',monospace;">if</code> 後面。如果 <code style="font-family:'IBM Plex Mono',monospace;">if</code> 後面不小心只打一個 <code style="font-family:'IBM Plex Mono',monospace;">=</code>，Python 會直接噴出語法錯誤。</p>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>範例</div>
+      <pre>a = <span class="nu">100</span>
+
+<span class="k">if</span> <span class="fn">int</span>(a) == <span class="nu">100</span>:
+    <span class="fn">print</span>(<span class="s">"good !"</span>)</pre>
+    </div>
+  </section>
+
+  <section id="u5" class="unit">
+    <div class="unit-tab">05</div>
+    <h2>使用者輸入與型別轉換</h2>
+    <p><code style="font-family:'IBM Plex Mono',monospace;">input()</code> 不管你輸入什麼，回傳的一定是字串（str）。要拿來做數學運算，得先用 <code style="font-family:'IBM Plex Mono',monospace;">int()</code> 或 <code style="font-family:'IBM Plex Mono',monospace;">float()</code> 轉型，不然會跟數字型態衝突而報錯。</p>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>1-1.py</div>
+      <pre>a = <span class="nu">1</span>
+b = <span class="nu">2</span>
+c = a + <span class="nu">1</span>
+
+<span class="fn">print</span>( a, b, c )
+
+d = <span class="fn">input</span>( <span class="s">"pls enter:"</span> )
+<span class="fn">print</span>( d )
+
+DD = <span class="fn">int</span>( d )
+e = c + DD
+
+<span class="fn">print</span>( e )</pre>
+    </div>
+  </section>
+
+  <section id="u6" class="unit">
+    <div class="unit-tab">06</div>
+    <h2>條件判斷 if / elif / else</h2>
+    <p><code style="font-family:'IBM Plex Mono',monospace;">if</code> / <code style="font-family:'IBM Plex Mono',monospace;">elif</code> / <code style="font-family:'IBM Plex Mono',monospace;">else</code> 由上往下依序檢查，符合哪一個條件就執行哪一段，其餘全部跳過。</p>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>untitled0.py</div>
+      <pre>a = <span class="fn">input</span>(<span class="s">"plz enter"</span>)
+<span class="fn">print</span>(a)
+
+<span class="k">if</span> ( <span class="fn">int</span>(a) == <span class="nu">100</span> ):
+    <span class="fn">print</span>(<span class="s">"SooooooooooGoooooooood"</span>)
+<span class="k">elif</span> ( <span class="fn">int</span>(a) &gt;= <span class="nu">80</span> ):
+    <span class="fn">print</span>(<span class="s">"GoooooooD Job"</span>)
+<span class="k">elif</span> ( <span class="fn">int</span>(a) &gt;= <span class="nu">60</span> ):
+    <span class="fn">print</span>(<span class="s">"Nice"</span>)
+<span class="k">else</span>:
+    <span class="fn">print</span>(<span class="s">"what???"</span>)</pre>
+    </div>
+    <p class="note">這裡用「由高到低」的順序判斷（100 → 80 → 60）。elif 的順序很重要，如果順序排錯，後面的條件可能永遠不會被檢查到。</p>
+  </section>
+
+  <section id="u7" class="unit">
+    <div class="unit-tab">07</div>
+    <h2>and / or 邏輯運算子</h2>
+    <p><code style="font-family:'IBM Plex Mono',monospace;">and</code> 要兩邊條件都成立才是 True；<code style="font-family:'IBM Plex Mono',monospace;">or</code> 只要有一邊成立就是 True。可以把多個判斷式包在一起，組成更複雜的條件。</p>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>參考範例</div>
+      <pre>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="s">"分數："</span>))
+attend = <span class="fn">int</span>(<span class="fn">input</span>(<span class="s">"出席次數："</span>))
+
+<span class="c"># and：分數及格「而且」出席次數達標，兩個都要成立</span>
+<span class="k">if</span> score &gt;= <span class="nu">60</span> <span class="k">and</span> attend &gt;= <span class="nu">10</span>:
+    <span class="fn">print</span>(<span class="s">"通過"</span>)
+
+<span class="c"># or：分數很高「或者」全勤，只要有一個成立就好</span>
+<span class="k">if</span> score &gt;= <span class="nu">90</span> <span class="k">or</span> attend &gt;= <span class="nu">15</span>:
+    <span class="fn">print</span>(<span class="s">"加分認定"</span>)</pre>
+    </div>
+    <p class="note">這裡刻意把 and、or 分成兩段獨立的 if，避免混在同一串 if / elif 裡互相影響、變得不好判斷。</p>
+  </section>
+
+  <section id="u8" class="unit">
+    <div class="unit-tab">08</div>
+    <h2>字串與數字不能直接相加</h2>
+    <p>Python 規定字串跟數字不能直接用 <code style="font-family:'IBM Plex Mono',monospace;">+</code> 加在一起：數字加數字是數學加法；字串加字串是把兩段文字接起來；但字串加數字會直接噴出 <code style="font-family:'IBM Plex Mono',monospace;">TypeError</code>。</p>
+    <div class="field-label">範例程式</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>參考範例</div>
+      <pre><span class="fn">print</span>( <span class="nu">1</span> + <span class="nu">2</span> )        <span class="c"># 3　(數字加數字)</span>
+<span class="fn">print</span>( <span class="s">"1"</span> + <span class="s">"2"</span> )    <span class="c"># "12" (字串接字串)</span>
+<span class="fn">print</span>( <span class="s">"1"</span> + <span class="nu">2</span> )      <span class="c"># TypeError，字串不能直接加數字</span></pre>
+    </div>
+    <p class="note">處理原則：要拼到畫面上顯示 → 全部換成字串；要做數學計算 → 全部換成數字。</p>
+  </section>
+
+  <section id="u9" class="unit">
+    <div class="unit-tab">09</div>
+    <h2>f-string 格式化字串（推薦寫法）</h2>
+    <p>老師這週示範是用舊式的 <code style="font-family:'IBM Plex Mono',monospace;">%s</code> / <code style="font-family:'IBM Plex Mono',monospace;">%d</code> 寫法組字串。現在更推薦用 f-string：字串前面加 <code style="font-family:'IBM Plex Mono',monospace;">f</code>，變數直接寫在 <code style="font-family:'IBM Plex Mono',monospace;">{}</code> 裡面，Python 會自動幫你轉成字串，不用再手動轉型或接一堆 <code style="font-family:'IBM Plex Mono',monospace;">+</code> 號。</p>
+    <div class="field-label">範例程式（舊式寫法）</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>2-3-0.py</div>
+      <pre>A1 = <span class="s">"apollo"</span>
+A2 = <span class="s">"ava"</span>
+a2 = <span class="nu">99</span>
+
+<span class="fn">print</span>( <span class="s">"%s %s 好 %d"</span> % (A1, A2, a2) )
+<span class="fn">print</span>( A1 + <span class="s">" 好"</span> )</pre>
+    </div>
+    <div class="field-label">範例程式（f-string 寫法）</div>
+    <div class="code-field">
+      <div class="file-tab"><span class="dot"></span>改寫版本</div>
+      <pre><span class="fn">print</span>( f<span class="s">"{A1} {A2} 好 {a2}"</span> )
+<span class="fn">print</span>( f<span class="s">"{A1} 好"</span> )</pre>
+    </div>
+  </section>
+
+  <footer>變數與判斷式 · 本週課程講義</footer>
+
+</div>
