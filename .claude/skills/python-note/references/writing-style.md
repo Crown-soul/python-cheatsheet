@@ -48,6 +48,9 @@
 2. **float 運算要注意精度問題**，例如 `0.1 + 0.2` 印出來是 `0.30000000000000004`，不是乾淨的 `0.3`；筆記裡任何牽涉小數的範例，先跑過一次再抄輸出結果。
 3. **型別要跟操作對得起來**：`%d` 配字串會炸 `TypeError`，f-string 卻不會擋——這種行為差異如果筆記裡有教到，一定要先實際跑出錯誤訊息再寫進去，不要憑空編錯誤訊息文字。
 4. **traceback、terminal 輸出這種多行內容，一字一行照抄實際執行結果**，包含行號、路徑格式、提示字這些細節，不要自己重排或簡化。
+5. **Git 指令要在乾淨環境跑**：不然會吃到自己機器的全域設定，寫出來的筆記換一台電腦就不成立。用 `export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null GIT_AUTHOR_NAME=T GIT_AUTHOR_EMAIL=t@t GIT_COMMITTER_NAME=T GIT_COMMITTER_EMAIL=t@t`。實際發生過的案例：舊備忘錄寫「push 被拒絕就先 `git pull` 再 `git push`」，在沒設 `pull.rebase` 的環境（Git 2.50）`git pull` 會直接 `fatal: Need to specify how to reconcile divergent branches`，要用 `git pull --no-rebase --no-edit`。push 被拒絕就代表兩邊各有新 commit，必然是分岔狀態，所以這個 fatal 一定會遇到。
+6. **遠端指令用本機的 `git init --bare` 模擬**（一個 bare 倉庫當 GitHub，兩個 clone 當「本機」和「網頁 / 另一台電腦」），輸出裡的本機路徑換成 `https://github.com/你/demo.git`。因為不是終端機，上傳下載的進度行（`Enumerating objects…`）不會出現，筆記要註明「畫面上還有幾行進度，跟成功與否無關，這裡省略」。
+7. **會開編輯器的指令要處理**：`git commit`（沒加 `-m`）、`git revert`、`git pull` 產生合併 commit 時 Git 會開 vim，初學者會卡住。範例一律加 `-m` 或 `--no-edit`，並在附錄「指令卡住了怎麼辦」講怎麼離開。`git log`、`git diff` 輸出太長會停在分頁畫面，按 `q` 離開，也寫進同一個附錄。
 
 ## 程式好像卡住了怎麼辦（附錄的必要區塊）
 

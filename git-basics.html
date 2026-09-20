@@ -25,17 +25,17 @@
       <a href="index.html" style="font-family:'IBM Plex Mono',monospace;font-size:16px;flex:none;">← 目錄</a>
     </div>
     <h1 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1.12;letter-spacing:0.01em;text-wrap:balance;">Git 基本流程</h1>
-    <p style="font-size:19px;color:#4A554E;max-width:56ch;text-wrap:pretty;">一個人做專案也用得上的最小工作流程。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的指令 → 執行結果 → 容易踩的坑</strong>。不用背，照著打一次就懂了。</p>
+    <p style="font-size:19px;color:#4A554E;max-width:56ch;text-wrap:pretty;">從建立倉庫到同步上 GitHub，一個人做專案也用得上的完整流程。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的指令 → 執行結果 → 容易踩的坑</strong>。不用背，照著打一次就懂了。</p>
     <div style="display:flex;flex-wrap:wrap;gap:10px 22px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;margin-top:6px;">
-      <span>9 個單元</span>
-      <span>約 20 分鐘</span>
-      <span>範圍：init / status / add / commit / log / .gitignore / restore（不含分支、遠端）</span>
+      <span>14 個單元</span>
+      <span>約 35 分鐘</span>
+      <span>範圍：init / status / add / diff / commit / log / .gitignore / restore / amend / revert / clone / push / pull（不含分支、衝突的解法）</span>
     </div>
   </header>
 
   <section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;">
     <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">先看這張學習地圖</h2>
-    <p style="font-size:17px;color:#4A554E;">整份筆記只在回答三件事。照順序讀，前面是後面的地基。</p>
+    <p style="font-size:17px;color:#4A554E;">整份筆記只在回答四件事。照順序讀，前面是後面的地基。</p>
     <div style="display:flex;flex-wrap:wrap;gap:14px;">
       <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 1</div>
@@ -50,21 +50,33 @@
       <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 2</div>
         <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">記錄每一次改變</div>
-        <div style="font-size:16px;color:#4A554E;">status、add、commit、log</div>
+        <div style="font-size:16px;color:#4A554E;">status、add、commit、log、diff</div>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
           <a href="#u4" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">04</a>
           <a href="#u5" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">05</a>
           <a href="#u6" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">06</a>
           <a href="#u7" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">07</a>
+          <a href="#u8" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">08</a>
         </div>
       </div>
       <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 3</div>
         <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">忽略與復原</div>
-        <div style="font-size:16px;color:#4A554E;">.gitignore、restore</div>
+        <div style="font-size:16px;color:#4A554E;">.gitignore、restore、amend、revert</div>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
-          <a href="#u8" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">08</a>
           <a href="#u9" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">09</a>
+          <a href="#u10" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">10</a>
+          <a href="#u11" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">11</a>
+        </div>
+      </div>
+      <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 4</div>
+        <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">跟 GitHub 同步</div>
+        <div style="font-size:16px;color:#4A554E;">remote、clone、push、pull</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <a href="#u12" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">12</a>
+          <a href="#u13" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">13</a>
+          <a href="#u14" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">14</a>
         </div>
       </div>
     </div>
@@ -81,7 +93,7 @@
       <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">版本控制在做什麼</h2>
     </div>
     <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">Git 是幫專案存很多個「存檔點」的工具，每個存檔點都能回得去。</p>
-    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">寫程式的過程常常會改壞東西、想不起來昨天改了什麼、或是想比較兩個版本差在哪。Git 每次存檔（<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;color:#1C2321;border-radius:5px;padding:1px 6px;">commit</code>）都會記下當時整個專案的樣子，之後隨時能回去看、能比較、能還原。不用 Git，「復原」只能靠自己複製一份 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_舊版</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_最終版</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_真的最終版</code> 這種資料夾。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">寫程式的過程常常會改壞東西、想不起來昨天改了什麼、或是想比較兩個版本差在哪。Git 每次存檔（<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;color:#1C2321;border-radius:5px;padding:1px 6px;">commit</code>）都會記下當時整個專案的樣子，之後隨時能回去看、能比較、能還原。不用 Git，「復原」只能靠自己複製一份 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_舊版</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_最終版</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_真的最終版</code> 這種資料夾。Git 跟 GitHub 是兩個東西，單元 12 會分清楚。</p>
   </section>
 
   <section id="u2" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
@@ -185,7 +197,7 @@ A  hello.py
     </ul>
     <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
-      <div style="font-size:17px;color:#3A443E;">習慣打 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git add .</code> 會把整個資料夾的東西一次全部加進去，包含不小心留在裡面的密碼、大檔案。剛開始學，一個一個檔名點名加比較安全，或是先寫好 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.gitignore</code>（單元 08）再用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.</code>。</div>
+      <div style="font-size:17px;color:#3A443E;">習慣打 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git add .</code> 會把整個資料夾的東西一次全部加進去，包含不小心留在裡面的密碼、大檔案。剛開始學，一個一個檔名點名加比較安全，或是先寫好 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.gitignore</code>（單元 09）再用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.</code>。</div>
     </div>
   </section>
 
@@ -203,6 +215,8 @@ A  hello.py
 <span style="color:#5C6370;">$</span> git log --oneline
 3ac9023 Add hello.py</pre>
     </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">訊息寫這次改了什麼，讓半年後的自己看得懂。一句話，結尾不用句號，中文英文都可以。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;background:#F3F4F1;"><div style="flex:1 1 40px;min-width:0;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">建議</div><div style="flex:1 1 40px;min-width:0;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">不建議</div></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;"><div style="flex:1 1 40px;min-width:0;font-size:17px;">新增變數與判斷式講義</div><div style="flex:1 1 40px;min-width:0;font-size:17px;"><span style="color:#8A4520;">update</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;"><div style="flex:1 1 40px;min-width:0;font-size:17px;">修正 f-string 範例的錯字</div><div style="flex:1 1 40px;min-width:0;font-size:17px;"><span style="color:#8A4520;">修改</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;"><div style="flex:1 1 40px;min-width:0;font-size:17px;">目錄頁加上 Git 筆記的連結</div><div style="flex:1 1 40px;min-width:0;font-size:17px;"><span style="color:#8A4520;">fix 2</span></div></div></div>
     <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
       <div style="font-size:17px;color:#3A443E;">commit 訊息不要寫 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">"update"</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">"fix"</code> 這種看不出內容的話。半年後回頭找是哪一次改壞的，這句話是你唯一的線索。寫清楚「這次做了什麼」，不用寫「為什麼」。</div>
@@ -228,14 +242,45 @@ A  hello.py
     </ul>
   </section>
 
-  <div style="display:flex;align-items:baseline;gap:14px;">
+    <section id="u8" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">08</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git diff：看改了什麼</h2></div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">git diff 一行一行列出改了什麼：前面有 + 的是新增，有 - 的是刪掉。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">commit 之前先跑一次，確認要存的內容就是你以為的內容。它跟 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git status</code> 一樣只看不改，隨時可以打。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git status --short
+ M hello.py
+?? memo.txt
+<span style="color:#5C6370;">$</span> git diff
+diff --git a/hello.py b/hello.py
+index 2f9a147..d4c2dc5 100644
+--- a/hello.py
++++ b/hello.py
+@@ -1 +1,2 @@
+ print("Hello")
++print("Hello")</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:128px;">--- / +++</span><span><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">---</code> 是改之前的版本，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">+++</code> 是改之後的版本。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:128px;">@@ -1 +1,2 @@</span><span>這一段改動在檔案的哪幾行：改之前從第 1 行起 1 行，改之後從第 1 行起 2 行。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:128px;">+print("Hello")</span><span>前面有 + 的行是新增的。沒有 + 或 - 的行沒動，列出來給你看前後文。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git diff</code> 只看還沒 add 的改動。add 之後它就什麼都不印，要加 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">--staged</code> 才看得到：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git add hello.py
+<span style="color:#5C6370;">$</span> git diff
+<span style="color:#5C6370;">$</span> git diff --staged
+diff --git a/hello.py b/hello.py
+index 2f9a147..d4c2dc5 100644
+--- a/hello.py
++++ b/hello.py
+@@ -1 +1,2 @@
+ print("Hello")
++print("Hello")</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">git diff</span><span>只看還沒 add 的改動。上面 add 之後它什麼都沒印。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">--staged</span><span>看已經 add、還沒 commit 的改動，下一個 commit 會存進去的內容就是這些。</span></li></ul>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div><div style="font-size:17px;color:#3A443E;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git diff</code> 什麼都沒印，不代表沒有改動：改動可能已經 add 了。用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git diff --staged</code>，或是直接看 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git status</code>。</div><div style="font-size:17px;color:#3A443E;">改動很多的時候，畫面會停在最下面的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">:</code> 或 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">(END)</code>，按 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">q</code> 離開，見附錄「指令卡住了怎麼辦」。</div></div>
+  </section>
+
+<div style="display:flex;align-items:baseline;gap:14px;">
     <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">CH 3 · 忽略與復原</div>
     <div style="flex:1;height:1px;background:#DFE3DA;"></div>
   </div>
 
-  <section id="u8" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+  <section id="u9" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
     <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">08</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">09</span>
       <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">.gitignore：不想被記錄的檔案</h2>
     </div>
     <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">把不想讓 Git 管的檔案名稱寫進 .gitignore，它們就不會再出現在 git status 裡。</p>
@@ -255,11 +300,12 @@ memo.txt</pre>
       <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
       <div style="font-size:17px;color:#3A443E;">.gitignore 只對「還沒被追蹤過」的檔案有效。如果一個檔案已經被 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git add</code> 或 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git commit</code> 過，寫進 .gitignore 也沒用，Git 還是會繼續追蹤它，要先用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git rm --cached 檔名</code> 把它從追蹤清單移除。</div>
     </div>
+      <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div><div style="font-size:17px;color:#3A443E;">密碼、API 金鑰、token 不能進 commit。倉庫如果是公開的，push 之後任何人都看得到。事後把檔案刪掉再 commit 也沒用，歷史紀錄裡仍然留著。做法是一開始就把檔名寫進 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.gitignore</code>，例如 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.env</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">tts-key.txt</code>。</div><div style="font-size:17px;color:#3A443E;">金鑰已經 push 出去的話，要當成外洩處理：到發行金鑰的服務把它作廢，換一把新的。</div></div>
   </section>
 
-  <section id="u9" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+  <section id="u10" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
     <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">09</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">10</span>
       <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git restore：反悔怎麼辦</h2>
     </div>
     <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">改壞了、想變回上一次存檔的樣子，用 git restore 檔名，還沒 commit 的改動會直接消失。</p>
@@ -277,18 +323,214 @@ memo.txt</pre>
     <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;">
       <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:120px;">restore 前後</span><span><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">M hello.py</code> 那行消失了，代表 hello.py 已經變回上一次 commit 時的樣子，剛才寫的東西真的不見了。</span></li>
     </ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">add 錯了檔案，想把它從暫存區拿回來，用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore --staged 檔名</code>：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git add memo.txt
+<span style="color:#5C6370;">$</span> git status --short
+A  memo.txt
+<span style="color:#5C6370;">$</span> git restore --staged memo.txt
+<span style="color:#5C6370;">$</span> git status --short
+?? memo.txt</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">A → ??</span><span><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">memo.txt</code> 從「已放進暫存區」變回「還沒被 add」，檔案內容沒動。</span></li></ul>
     <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
       <div style="font-size:17px;color:#3A443E;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git restore</code> 是真的把還沒 commit 的修改刪掉，刪掉就找不回來了。先用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git status</code> 或 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git diff</code> 確認真的要丟掉這個檔案的改動，不確定就先別動。</div>
     </div>
   </section>
 
+    <section id="u11" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">11</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git commit --amend 與 git revert：commit 之後反悔</h2></div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">已經 commit 的東西不會消失：訊息寫錯用 --amend 改，整次改動想撤銷用 revert。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">這兩個都是「已經 commit」之後的反悔，跟單元 10 的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code>（還沒 commit）不一樣。先看訊息寫錯的情況：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git log --oneline
+2a12348 Add helo.py
+<span style="color:#5C6370;">$</span> git commit --amend -m <span style="color:#98C379;">"Add hello.py"</span>
+[main 150a852] Add hello.py
+ Date: Sun Sep 20 22:47:30 2026 +0800
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hello.py
+<span style="color:#5C6370;">$</span> git log --oneline
+150a852 Add hello.py</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:170px;">2a12348 → 150a852</span><span>commit 的代號變了。<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">--amend</code> 是把最後一個 commit 換成新的，不是多加一個，所以 log 裡仍然只有一行。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:170px;">只能改最後一個</span><span><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">--amend</code> 只動最近一次 commit，更早的改不了。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">想撤銷更早的某次改動，用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git revert</code>。它新增一個反向的 commit，把那次的改動抵銷掉：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git log --oneline
+79d0ffe Add debug print
+9ffce54 Print a greeting twice
+150a852 Add hello.py
+<span style="color:#5C6370;">$</span> git revert --no-edit 79d0ffe
+[main d808f64] Revert "Add debug print"
+ Date: Sun Sep 20 22:47:30 2026 +0800
+ 1 file changed, 1 deletion(-)
+<span style="color:#5C6370;">$</span> git log --oneline
+d808f64 Revert "Add debug print"
+79d0ffe Add debug print
+9ffce54 Print a greeting twice
+150a852 Add hello.py</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">79d0ffe</span><span>要撤銷哪一次，用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git log --oneline</code> 查編號。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">Revert "..."</span><span>新增的反向 commit。<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Add debug print</code> 那一行仍然在歷史裡，沒有被改寫。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">--no-edit</span><span>不加的話，Git 會開編輯器讓你確認說明；加了就直接用預設說明。編輯器的離開方式見附錄「指令卡住了怎麼辦」。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">整理一下，不同的狀況用不同的指令：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;background:#F3F4F1;"><div style="flex:4 1 160px;min-width:0;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">狀況</div><div style="flex:5 1 200px;min-width:0;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">指令</div><div style="flex:5 1 200px;min-width:0;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">注意</div></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;"><div style="flex:4 1 160px;min-width:0;font-size:17px;">改壞了檔案，還沒 add</div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore 檔名</code></div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><span style="color:#4A554E;">改動會消失，救不回來</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;"><div style="flex:4 1 160px;min-width:0;font-size:17px;">add 錯了檔案</div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore --staged 檔名</code></div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><span style="color:#4A554E;">檔案內容不變，取消暫存的紀錄</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;"><div style="flex:4 1 160px;min-width:0;font-size:17px;">commit 訊息寫錯，還沒 push</div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git commit --amend -m "新說明"</code></div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><span style="color:#4A554E;">只能改最後一個 commit</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px;border-bottom:1px solid #E7EAE3;"><div style="flex:4 1 160px;min-width:0;font-size:17px;">已經 push，想撤銷某次 commit</div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git revert --no-edit 編號</code></div><div style="flex:5 1 200px;min-width:0;font-size:17px;"><span style="color:#4A554E;">新增一個反向的 commit，舊的歷史不動。編號用 git log --oneline 查</span></div></div></div>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div><div style="font-size:17px;color:#3A443E;">已經 push 的 commit 不要用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">--amend</code> 改。本機的歷史改了，跟 GitHub 上的對不起來，之後 push 會被拒絕，要用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">--force</code> 才推得上去，而 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">--force</code> 是附錄列的危險指令。已經 push 的用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">revert</code>。</div><div style="font-size:17px;color:#3A443E;">commit 過的內容幾乎找得回來。會弄丟的，是還沒 commit 的改動。</div></div>
+  </section>
+
   <div style="display:flex;align-items:baseline;gap:14px;">
+    <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">CH 4 · 跟 GitHub 同步</div>
+    <div style="flex:1;height:1px;background:#DFE3DA;"></div>
+  </div>
+
+  <section id="u12" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">12</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">GitHub 與 remote：連到雲端的倉庫</h2></div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">GitHub 是放 Git 專案的網站。Git 在你的電腦上，GitHub 在網路上，兩邊靠 push 和 pull 同步。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">到目前為止，三個區域都在你的電腦裡。加上 GitHub，資料的流向多了最後一站：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>資料的流向</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;">工作目錄    你改檔案的地方
+    ↓  git add
+暫存區      這次要存哪些檔案
+    ↓  git commit
+本機倉庫    存檔點記在你的電腦裡
+    ↓  git push
+GitHub      雲端，網站和別人看到的版本</pre></div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">GitHub 上的那份倉庫叫「遠端」（remote），預設的代號是 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">origin</code>。要跟它連起來有兩種情況：</p>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">clone</span><span>GitHub 上已經有倉庫：<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git clone 網址</code>，把它複製一份到你的電腦。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">remote add</span><span>電腦上先有倉庫（像單元 02 的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git init</code>）：<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git remote add origin 網址</code>，告訴 Git 遠端在哪。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">這份筆記裡的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">https://github.com/你/demo.git</code> 是示範用的網址，換成你自己在 GitHub 上建的倉庫網址。連好之後用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git remote -v</code> 檢查：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git remote add origin https://github.com/你/demo.git
+<span style="color:#5C6370;">$</span> git remote -v
+origin	https://github.com/你/demo.git (fetch)
+origin	https://github.com/你/demo.git (push)</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:140px;">(fetch) / (push)</span><span>fetch 是下載，push 是上傳。兩個網址通常一樣。</span></li></ul>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div><div style="font-size:17px;color:#3A443E;">改了檔案、存了檔、上傳了，是三件事。沒 commit 的改動最容易弄丟；commit 了但沒 push，內容只在你的電腦上，GitHub 上看不到。</div></div>
+  </section>
+
+  <section id="u13" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">13</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git push 與 git pull：上傳與下載</h2></div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">git push 把本機的 commit 傳上 GitHub，git pull 把 GitHub 上的新 commit 抓回本機。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">第一次 push 要多加 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">-u origin main</code>，告訴 Git「本機的 main 對應 GitHub 的 main」。之後直接打 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git push</code> 就好。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git push -u origin main
+To https://github.com/你/demo.git
+ * [new branch]      main -&gt; main
+branch 'main' set up to track 'origin/main'.
+<span style="color:#5C6370;">$</span> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">[new branch]</span><span>GitHub 上原本沒有 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">main</code>，這次建立了。之後的 push 會顯示成 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">舊代號..新代號  main -&gt; main</code>。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">up to date</span><span>本機的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">main</code> 跟 GitHub 上的一樣新，沒有落後，也沒有多出來的 commit。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">在網頁上或另一台電腦改過、push 到 GitHub 之後，本機用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git pull</code> 把新的 commit 抓下來：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git pull
+From https://github.com/你/demo
+   af09164..83dbe61  main       -&gt; origin/main
+Updating af09164..83dbe61
+Fast-forward
+ hello.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+<span style="color:#5C6370;">$</span> git log --oneline
+83dbe61 Edit greeting on the web
+af09164 Add hello.py</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:150px;">Fast-forward</span><span>本機沒有新的 commit，Git 直接把 GitHub 上的新 commit 接在後面。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:150px;">af09164..83dbe61</span><span>本機從 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">af09164</code> 更新到 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">83dbe61</code>。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">上傳和下載的時候，畫面最前面還會跑幾行進度（像 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Enumerating objects</code>），跟有沒有成功無關，這份筆記省略。</p>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div><div style="font-size:17px;color:#3A443E;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git push</code> 只送 commit。push 之前先跑 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git status</code>，確認想上傳的改動都 commit 了。</div></div>
+  </section>
+
+  <section id="u14" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">14</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">push 被拒絕：先合併再上傳</h2></div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">push 出現 rejected 或 fetch first，代表 GitHub 上有你本機沒有的 commit。先把它們合併進來，再 push。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">常見原因是在網頁或另一台電腦上改過，本機不知道。下面的例子是兩邊各自 commit 了不同的檔案：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git push
+To https://github.com/你/demo.git
+ ! [rejected]        main -&gt; main (fetch first)
+error: failed to push some refs to 'https://github.com/你/demo.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">[rejected]</span><span>GitHub 上有你沒有的 commit，這次上傳被擋下來，什麼都沒有傳出去。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">hint:</span><span>Git 給的建議，先讀。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">建議說要用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git pull</code>，但直接打會失敗：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git pull
+From https://github.com/你/demo
+   83dbe61..9faf453  main       -&gt; origin/main
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint:
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">divergent</span><span>分岔了：GitHub 和本機各自有對方沒有的 commit。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:100px;">reconcile</span><span>Git 不替你決定怎麼合起來，要你選一種。最直觀的是合併（merge），加上 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">--no-rebase</code>。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">合併之後再 push，就送得上去了：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git pull --no-rebase --no-edit
+Merge made by the 'ort' strategy.
+ web.py | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 web.py
+<span style="color:#5C6370;">$</span> git push
+To https://github.com/你/demo.git
+   9faf453..d79d469  main -&gt; main
+<span style="color:#5C6370;">$</span> git log --oneline
+d79d469 Merge branch 'main' of https://github.com/你/demo
+fc6e811 Add local.py
+9faf453 Add web.py
+83dbe61 Edit greeting on the web
+af09164 Add hello.py</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:130px;">--no-rebase</span><span>用合併的方式把 GitHub 上的 commit 併進來。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:130px;">--no-edit</span><span>合併會產生一個新的 commit，這個旗標讓它直接用預設說明，不開編輯器。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:130px;">Merge branch</span><span>最上面那個 commit 是 Git 產生的合併紀錄，把 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Add web.py</code> 和 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Add local.py</code> 兩邊接在一起。</span></li></ul>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">每次都加旗標很麻煩，可以設定一次，以後 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git pull</code> 就照合併的方式做（這個指令沒有輸出）：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git config --global pull.rebase false</pre></div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">pull 之後如果出現 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">CONFLICT</code>，代表同一處兩邊都改了，Git 沒辦法決定留哪一邊：</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git pull --no-rebase --no-edit
+From https://github.com/你/demo
+   d79d469..d61bcd2  main       -&gt; origin/main
+Auto-merging hello.py
+CONFLICT (content): Merge conflict in hello.py
+Automatic merge failed; fix conflicts and then commit the result.
+<span style="color:#5C6370;">$</span> git status --short
+UU hello.py
+<span style="color:#5C6370;">$</span> git merge --abort
+<span style="color:#5C6370;">$</span> git status --short</pre></div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;"><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">UU</span><span>這個檔案兩邊都改了，還沒處理。</span></li><li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">--abort</span><span>退回 pull 之前的狀態，檔案回到原樣。</span></li></ul>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div><div style="font-size:17px;color:#3A443E;">出現 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">CONFLICT</code> 的時候，停下來看訊息，不要急著改檔案。這份筆記不教怎麼解衝突：先 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git merge --abort</code> 退回原狀，再找懂的人一起看。</div></div>
+  </section>
+
+  <div style="display:flex;flex-direction:column;gap:22px;padding-top:12px;border-top:2px solid #1C2321;">
+    <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">附錄</div>
+
+    <section style="display:flex;flex-direction:column;gap:14px;">
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">指令卡住了怎麼辦</h2>
+      <div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">出現一個滿是 ~ 的畫面</span><span style="font-size:17px;flex:1 1 260px;min-width:0;">Git 開了文字編輯器（預設多半是 vim），要你寫說明。按 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">i</code> 開始打字，寫完按 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Esc</code>，輸入 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">:wq</code> 再按 Enter，存檔離開。<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git revert</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git pull</code> 的合併說明已經有預設文字，直接 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Esc</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">:wq</code> 就行。</span></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">畫面停在 : 或 (END)，打指令沒反應</span><span style="font-size:17px;flex:1 1 260px;min-width:0;">輸出太長，Git 用分頁的方式顯示（<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git log</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git diff</code> 常見）。按 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">q</code> 離開，空白鍵往下翻一頁。</span></div></div>
+      <p style="font-size:17px;color:#3A443E;text-wrap:pretty;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git commit</code> 沒寫說明就離開編輯器，會看到這一行，代表這次 commit 被中止了，重打一次並且加上 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">-m</code>：</p>
+      <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git commit
+Aborting commit due to empty commit message.</pre></div>
+    </section>
+
+    <section style="display:flex;flex-direction:column;gap:14px;">
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">怎麼讀錯誤訊息</h2>
+      <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">Git 的錯誤訊息很長，先照下面三個順序看，多數時候不用讀完：</p>
+      <div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">從最後幾行看起</span><span style="font-size:17px;flex:1 1 260px;min-width:0;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">error:</code> 或 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">fatal:</code> 開頭的行是結論。<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">error</code> 是這次指令沒成功，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">fatal</code> 是指令直接中止。</span></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">再讀 hint:</span><span style="font-size:17px;flex:1 1 260px;min-width:0;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">hint:</code> 開頭的行是 Git 給的建議，常常直接寫了下一步要打什麼。</span></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">跳過 To 和 From</span><span style="font-size:17px;flex:1 1 260px;min-width:0;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">To 網址</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">From 網址</code> 是告訴你連到哪一個倉庫，出錯時先跳過。</span></div></div>
+      <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">範例看 <a href="#u14">單元 14</a>：先看到 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">rejected</code>，讀 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">hint:</code> 得知要 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git pull</code>；pull 之後換成 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">fatal:</code>，再讀 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">hint:</code> 選一種合併方式。</p>
+    </section>
+
+    <section style="display:flex;flex-direction:column;gap:14px;">
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">危險指令</h2>
+      <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">下面三個指令會刪東西或覆蓋東西，跑之前要知道它在做什麼。</p>
+      <div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">git push --force</span><span style="font-size:17px;flex:1 1 260px;min-width:0;">用本機的版本覆蓋 GitHub，GitHub 上別人的 commit 會消失。</span></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">git reset --hard</span><span style="font-size:17px;flex:1 1 260px;min-width:0;">丟掉所有還沒 commit 的改動，救不回來。</span></div><div style="display:flex;flex-wrap:wrap;gap:6px 16px;padding:14px 18px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;max-width:100%;min-width:190px;">git clean -f</span><span style="font-size:17px;flex:1 1 260px;min-width:0;">刪掉所有沒被 Git 追蹤的檔案，救不回來。</span></div></div>
+      <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">注意</div><div style="font-size:17px;color:#3A443E;">在網路上看到含這幾個字的指令，先別複製去跑。跑 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git status</code>，把畫面貼給懂的人看。</div></div>
+    </section>
+
+    <section style="display:flex;flex-direction:column;gap:14px;">
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">名詞小辭典</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;"><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">repository（repo）</div><div style="font-size:17px;">專案資料夾，連同它所有的歷史紀錄。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">commit</div><div style="font-size:17px;">一個存檔點，也指「存檔」這個動作。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">add</div><div style="font-size:17px;">把檔案放進暫存區，決定這次 commit 包含哪些。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">push</div><div style="font-size:17px;">把本機的 commit 傳到 GitHub。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">pull</div><div style="font-size:17px;">把 GitHub 上的新 commit 抓回本機。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">clone</div><div style="font-size:17px;">把 GitHub 上的 repo 複製一份到本機。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">branch</div><div style="font-size:17px;">一條獨立的存檔線，主線預設叫 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">main</code>。這份筆記沒教怎麼開新的。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">remote / origin</div><div style="font-size:17px;">GitHub 上那份 repo 的代號，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">origin</code> 是預設的名字。</div></div><div style="flex:1 1 200px;min-width:0;border:1px solid #DFE3DA;border-radius:9px;padding:14px;background:#FFFFFF;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;margin-bottom:4px;">.gitignore</div><div style="font-size:17px;">列出 Git 不要追蹤的檔案。</div></div></div>
+    </section>
+
+  </div>
+
+<div style="display:flex;align-items:baseline;gap:14px;">
     <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">練習題</div>
     <div style="flex:1;height:1px;background:#DFE3DA;"></div>
   </div>
 
-  <p style="font-size:17px;color:#4A554E;text-wrap:pretty;">前四題各自對應前面幾個單元，最後一題把整個流程串起來，是這份筆記的大魔王題。每題都附「預期輸出」，自己跑完可以對答案，不用來問我對不對。</p>
+  <p style="font-size:17px;color:#4A554E;text-wrap:pretty;">前七題各自對應前面幾個單元，最後一題把單元 01～11 的流程串起來，是這份筆記的大魔王題。每題都附「預期輸出」，自己跑完可以對答案。想看做法，寫完再點開「參考解答」。練習 7 需要一個 GitHub 帳號。</p>
 
   <section style="display:flex;flex-direction:column;gap:16px;">
     <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
@@ -300,6 +542,14 @@ memo.txt</pre>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git status 會顯示「On branch main」跟「No commits yet」，沒有任何檔案列出來（因為資料夾裡還沒有東西）</span>
     </div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git init -b main
+Initialized empty Git repository in /Users/你/Desktop/demo/.git/
+<span style="color:#5C6370;">$</span> git status
+On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git status</code> 的第二行是 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">No commits yet</code>，因為資料夾裡還沒有任何檔案，所以沒有列出檔案。</p></div></details>
   </section>
 
   <section style="display:flex;flex-direction:column;gap:16px;">
@@ -312,6 +562,10 @@ memo.txt</pre>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git status --short 顯示 A  notes.txt</span>
     </div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"第一行"</span> &gt; notes.txt
+<span style="color:#5C6370;">$</span> git add notes.txt
+<span style="color:#5C6370;">$</span> git status --short
+A  notes.txt</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">A</code> 代表 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">notes.txt</code> 已經放進暫存區。</p></div></details>
   </section>
 
   <section style="display:flex;flex-direction:column;gap:16px;">
@@ -324,6 +578,12 @@ memo.txt</pre>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git log --oneline 顯示一行：一串英數字代號 + Add notes.txt</span>
     </div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git commit -m <span style="color:#98C379;">"Add notes.txt"</span>
+[main (root-commit) 1d2f378] Add notes.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 notes.txt
+<span style="color:#5C6370;">$</span> git log --oneline
+1d2f378 Add notes.txt</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;">每個人的代號（<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">1d2f378</code>）不會一樣，訊息對就好。</p></div></details>
   </section>
 
   <section style="display:flex;flex-direction:column;gap:16px;">
@@ -336,6 +596,75 @@ memo.txt</pre>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git status --short 只看到 ?? .gitignore，secret.log 不會出現</span>
     </div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"password=abc"</span> &gt; secret.log
+<span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"*.log"</span> &gt; .gitignore
+<span style="color:#5C6370;">$</span> git status --short
+?? .gitignore</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">notes.txt</code> 在練習 3 已經 commit 過，所以不會出現。<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">secret.log</code> 被 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">*.log</code> 擋掉，清單裡只剩 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code> 這個還沒 add 的新檔案。</p></div></details>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 5</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">看差異</h2></div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">在練習 4 的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">notes.txt</code> 再加一行，先用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git diff</code> 看，再 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git add notes.txt</code>，之後分別用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git diff</code> 跟 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git diff --staged</code> 各看一次。</p>
+    <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">第一次 git diff 列出新增的那一行，前面有 +。git add 之後，git diff 什麼都不印，git diff --staged 才列出同樣的內容。</span></div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"第二行"</span> &gt;&gt; notes.txt
+<span style="color:#5C6370;">$</span> git diff
+diff --git a/notes.txt b/notes.txt
+index 468d803..d2c1cb5 100644
+--- a/notes.txt
++++ b/notes.txt
+@@ -1 +1,2 @@
+ 第一行
++第二行
+<span style="color:#5C6370;">$</span> git add notes.txt
+<span style="color:#5C6370;">$</span> git diff
+<span style="color:#5C6370;">$</span> git diff --staged
+diff --git a/notes.txt b/notes.txt
+index 468d803..d2c1cb5 100644
+--- a/notes.txt
++++ b/notes.txt
+@@ -1 +1,2 @@
+ 第一行
++第二行</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;">以 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">notes.txt</code> 原本只有「第一行」為例。<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">+第二行</code> 就是新增的那一行。</p></div></details>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 6</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">改 commit 訊息</h2></div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">把 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">notes.txt</code> 改一下、add、commit，訊息故意寫成 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Updte notes</code>（錯字）。想辦法把訊息改成 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">Update notes</code>，而且不要多出一個新的 commit。</p>
+    <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git log --oneline 最上面一行的訊息是 Update notes，Updte notes 那一行不會另外出現在清單裡。</span></div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git commit -m <span style="color:#98C379;">"Updte notes"</span>
+[main 211646a] Updte notes
+ 1 file changed, 1 insertion(+)
+<span style="color:#5C6370;">$</span> git log --oneline
+211646a Updte notes
+17945fd Ignore log files
+1d2f378 Add notes.txt
+<span style="color:#5C6370;">$</span> git commit --amend -m <span style="color:#98C379;">"Update notes"</span>
+[main b010af4] Update notes
+ Date: Sun Sep 20 22:48:09 2026 +0800
+ 1 file changed, 1 insertion(+)
+<span style="color:#5C6370;">$</span> git log --oneline
+b010af4 Update notes
+17945fd Ignore log files
+1d2f378 Add notes.txt</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">--amend</code> 換掉的是最後一個 commit，所以代號從 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">211646a</code> 變成 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">b010af4</code>，log 裡沒有多一行。</p></div></details>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 7</span><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">推上 GitHub</h2></div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">在 GitHub 網頁上建一個空的倉庫（不要勾選加 README），用網頁給的網址，把練習 1～6 的資料夾連上去，然後 push。第一次 push 會要你登入，照畫面指示做，登入的細節這份筆記不教。</p>
+    <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">push 的最後一行是 branch 'main' set up to track 'origin/main'.，接著 git status 顯示 Your branch is up to date with 'origin/main'.</span></div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git remote add origin https://github.com/你/demo.git
+<span style="color:#5C6370;">$</span> git remote -v
+origin	https://github.com/你/demo.git (fetch)
+origin	https://github.com/你/demo.git (push)
+<span style="color:#5C6370;">$</span> git push -u origin main
+To https://github.com/你/demo.git
+ * [new branch]      main -&gt; main
+branch 'main' set up to track 'origin/main'.
+<span style="color:#5C6370;">$</span> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;">網址換成你自己的倉庫。<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">-u</code> 只有第一次 push 要加。</p></div></details>
   </section>
 
   <section style="border:2px solid #1C2321;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;">
@@ -372,10 +701,37 @@ memo.txt</pre>
     </div>
     <div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:8px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">大魔王提示</div>
-      <div style="font-size:17px;color:#3A443E;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code> 要在 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">debug.log</code> 被 add 之前寫好，順序顛倒的話單元 08 的坑會直接發生在你身上。</div>
-      <div style="font-size:17px;color:#3A443E;">第 6 步的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code> 只能救回「還沒 commit」的改動。如果不小心先 commit 了才想反悔，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code> 不是對的指令——這份筆記沒教怎麼救已經 commit 的東西，先想想看要不要另外問。</div>
+      <div style="font-size:17px;color:#3A443E;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code> 要在 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">debug.log</code> 被 add 之前寫好，順序顛倒的話單元 09 的坑會直接發生在你身上。</div>
+      <div style="font-size:17px;color:#3A443E;">第 6 步的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code> 只能救回「還沒 commit」的改動。如果不小心先 commit 了才想反悔，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code> 不是對的指令，已經 commit 的東西要用單元 11 的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git revert</code>。</div>
       <div style="font-size:17px;color:#3A443E;">結束時 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git log --oneline</code> 應該剛好兩行，不多不少；如果變成三行，代表某一步 commit 了不該 commit 的東西。</div>
     </div>
+      <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;"><summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary><div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;"><div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;"><div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;"><span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機</div><pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git init -b main
+Initialized empty Git repository in /Users/你/Desktop/demo/.git/
+<span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"print(1)"</span> &gt; main.py
+<span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"log line"</span> &gt; debug.log
+<span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"debug.log"</span> &gt; .gitignore
+<span style="color:#5C6370;">$</span> git status --short
+?? .gitignore
+?? main.py
+<span style="color:#5C6370;">$</span> git add main.py .gitignore
+<span style="color:#5C6370;">$</span> git commit -m <span style="color:#98C379;">"Initial commit"</span>
+[main (root-commit) 0edd7df] Initial commit
+ 2 files changed, 2 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 main.py
+<span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"print(2)"</span> &gt;&gt; main.py
+<span style="color:#5C6370;">$</span> git add main.py
+<span style="color:#5C6370;">$</span> git commit -m <span style="color:#98C379;">"Print a second line"</span>
+[main 056a02e] Print a second line
+ 1 file changed, 1 insertion(+)
+<span style="color:#5C6370;">$</span> echo <span style="color:#98C379;">"print(3)"</span> &gt;&gt; main.py
+<span style="color:#5C6370;">$</span> git status --short
+ M main.py
+<span style="color:#5C6370;">$</span> git restore main.py
+<span style="color:#5C6370;">$</span> git status --short
+<span style="color:#5C6370;">$</span> git log --oneline
+056a02e Print a second line
+0edd7df Initial commit</pre></div><p style="font-size:17px;color:#3A443E;text-wrap:pretty;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code> 先寫好再 add，所以 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">debug.log</code> 從頭到尾沒有出現在 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git status --short</code> 的清單裡。第 6 步 restore 之前是 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;"> M main.py</code>，之後清單變空的，最後 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git log --oneline</code> 剛好兩行。</p></div></details>
   </section>
 
   <footer style="text-align:center;color:#6B756E;font-size:16px;padding-top:16px;border-top:1px solid #DFE3DA;">Git 學習筆記 · 基本流程 · 持續更新</footer>

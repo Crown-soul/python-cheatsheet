@@ -274,6 +274,29 @@
 </section>
 ```
 
+### 參考解答（使用者明確要答案才加）
+
+放在每一題的最後一個元素（大魔王題放在「大魔王提示」框後面）。用 `<details>` 摺疊，讓學生寫完才點開，不會一打開頁面就看到答案。
+
+```html
+<details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;">
+  <summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary>
+  <div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;">
+    <!-- 單元 section 裡的「範例程式碼框」：file-tab + 上色的 pre + 輸出列 -->
+    <!-- 一兩句說明：為什麼這樣寫、寫反了會怎樣 -->
+  </div>
+</details>
+```
+
+- 解答裡的程式碼框跟單元裡的完全同一套（色票、file-tab、輸出列）。Python 的 file-tab 用 `1.py`、`boss.py` 這種檔名，Git 用「終端機」。
+- 有多組輸入的題目，「輸出」列每組一行，寫成「輸入 → 畫面」，用 `<br>` 分行；至少涵蓋每個分支跟邊界值。
+- 說明只講一件事：容易寫錯的地方（實際例子：等第判斷順序倒過來、兩個結果可以同時成立卻用了 `elif`）。
+- 解答裡的程式、指令、輸出都要實際跑過。Git 的解答直接貼真實終端機輸出，路徑換成佔位（`/Users/你/Desktop/demo/.git/`、`https://github.com/你/demo.git`）。
+
+### 簡易對照表
+
+筆記裡的「建議 / 不建議」「狀況 / 指令 / 注意」這類表格，用 flex 排的列，不要用 `<table>`（手機寬度會爆版）。每個欄位要給 flex-basis（`flex:N 1 (N*40)px`），窄螢幕才會一欄一欄堆疊，寬螢幕維持並排。表頭列底色 `#F3F4F1`、mono 字；資料列用 `#E7EAE3` 細分隔線；「不建議」「注意」這種警示欄位的字用 `#8A4520`。
+
 ### Footer
 
 ```html

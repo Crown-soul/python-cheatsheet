@@ -1,5 +1,17 @@
 # 版本紀錄
 
+## v5 — 2026-09-20：自動檢查 hook、參考解答、合併筆記
+
+起因：使用者要把標籤與反引號檢查做成自動執行，補上練習題解答，並把 `git-cheatsheet.html`（備忘錄）跟 `git-basics.html`（講義）合成一份。
+
+- 新增 `.claude/settings.json` 的 PostToolUse hook + `.claude/hooks/check-html.py`：每次 Write / Edit `.html` 都自動檢查標籤開合、殘留的成對反引號、內部連結與錨點。單獨一個反引號（VS Code 快捷鍵「⌃ `」）不算錯。對既有 5 份 HTML 零誤報；故意做壞的檔案 4 種問題都抓得到；在這個 session 實際觸發過，錯誤有回到 Claude。
+- 檢查清單的第 1、2、8 點併成「自動檢查」，補上 Bash 批次改檔時 hook 不會觸發、要手動跑的提醒。
+- 新增「參考解答」元件（`<details>` 摺疊）跟「簡易對照表」元件，見 `design-system.md`。解答預設仍然不附，使用者明確說要才加。
+- 新增 `source-material.md`「合併既有筆記」流程。
+- `writing-style.md` 補三條 Git 驗算規則：用乾淨環境跑（案例：`git pull` 在分岔時會 fatal，舊備忘錄「先 pull 再 push」在沒設 `pull.rebase` 的環境行不通）、遠端指令用本機 bare 倉庫模擬、會開編輯器的指令要加 `-m` / `--no-edit` 並在附錄講怎麼離開。
+- 實際套用：`git-basics.html` 從 9 個單元擴成 14 個（新增 diff、amend、revert、GitHub remote、push / pull、push 被拒絕），加附錄（指令卡住、讀錯誤訊息、危險指令、名詞小辭典），練習題從 4 題擴成 7 題；Python 與 Git 的練習題都補了參考解答。
+- 備註：建立 hook 的過程中，`.claude/settings.json` 和 `.claude/hooks/` 曾經在還沒 commit 的狀況下消失過一次（原因不明；`.claude/` 一開始在工作區是空的、skill 檔是從 git 還原的），重建後保持存在。commit 之後就受版本控制保護。
+
 ## v4 — 2026-09-20：拆成多檔、涵蓋第二個科目
 
 - SKILL.md 從單一 477 行檔案拆成主檔 + `references/`（design-system、writing-style、source-material、review-workflow），主檔只留任務判斷、先問清單、檢查清單、互動習慣，其餘按任務類型分開讀。

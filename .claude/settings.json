@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/check-html.py\"",
+            "timeout": 15,
+            "statusMessage": "檢查 HTML 標籤與反引號..."
+          }
+        ]
+      }
+    ]
+  }
+}
