@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git 筆記 - 基本流程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#FBFAF7;color:#1C2321;font-family:'Source Sans 3','Noto Sans TC',-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+  a{color:#2F6280;text-decoration:none;}
+  a:hover{color:#1C2321;}
+  pre{margin:0;}
+  h1,h2,h3,p,ul,ol{margin:0;}
+</style>
+</head>
+<body>
+<div style="max-width:880px;margin:0 auto;padding:40px 20px 80px;display:flex;flex-direction:column;gap:34px;">
+
+  <header style="display:flex;flex-direction:column;gap:12px;padding-bottom:26px;border-bottom:2px solid #1C2321;">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;letter-spacing:0.14em;text-transform:uppercase;color:#2F6280;font-weight:500;">Git 課程筆記</div>
+      <a href="index.html" style="font-family:'IBM Plex Mono',monospace;font-size:16px;flex:none;">← 目錄</a>
+    </div>
+    <h1 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1.12;letter-spacing:0.01em;text-wrap:balance;">Git 基本流程</h1>
+    <p style="font-size:19px;color:#4A554E;max-width:56ch;text-wrap:pretty;">一個人做專案也用得上的最小工作流程。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的指令 → 執行結果 → 容易踩的坑</strong>。不用背，照著打一次就懂了。</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px 22px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;margin-top:6px;">
+      <span>9 個單元</span>
+      <span>約 20 分鐘</span>
+      <span>範圍：init / status / add / commit / log / .gitignore / restore（不含分支、遠端）</span>
+    </div>
+  </header>
+
+  <section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;">
+    <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">先看這張學習地圖</h2>
+    <p style="font-size:17px;color:#4A554E;">整份筆記只在回答三件事。照順序讀，前面是後面的地基。</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;">
+      <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 1</div>
+        <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">建立一個倉庫</div>
+        <div style="font-size:16px;color:#4A554E;">版本控制是什麼、git init、三個區域</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <a href="#u1" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">01</a>
+          <a href="#u2" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">02</a>
+          <a href="#u3" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">03</a>
+        </div>
+      </div>
+      <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 2</div>
+        <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">記錄每一次改變</div>
+        <div style="font-size:16px;color:#4A554E;">status、add、commit、log</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <a href="#u4" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">04</a>
+          <a href="#u5" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">05</a>
+          <a href="#u6" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">06</a>
+          <a href="#u7" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">07</a>
+        </div>
+      </div>
+      <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 3</div>
+        <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">忽略與復原</div>
+        <div style="font-size:16px;color:#4A554E;">.gitignore、restore</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <a href="#u8" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">08</a>
+          <a href="#u9" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">09</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="display:flex;align-items:baseline;gap:14px;">
+    <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">CH 1 · 建立一個倉庫</div>
+    <div style="flex:1;height:1px;background:#DFE3DA;"></div>
+  </div>
+
+  <section id="u1" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">01</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">版本控制在做什麼</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">Git 是幫專案存很多個「存檔點」的工具，每個存檔點都能回得去。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">寫程式的過程常常會改壞東西、想不起來昨天改了什麼、或是想比較兩個版本差在哪。Git 每次存檔（<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;color:#1C2321;border-radius:5px;padding:1px 6px;">commit</code>）都會記下當時整個專案的樣子，之後隨時能回去看、能比較、能還原。不用 Git，「復原」只能靠自己複製一份 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_舊版</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_最終版</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">專案_真的最終版</code> 這種資料夾。</p>
+  </section>
+
+  <section id="u2" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">02</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git init：把資料夾變成倉庫</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">git init 是跟 Git 說「從這裡開始，幫我記錄以後的每個改動」。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">在一個資料夾裡執行一次 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git init</code>，這個資料夾就變成一個 Git 倉庫（repository），底下會多一個藏起來的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.git</code> 資料夾，所有歷史紀錄都存在那裡面。整個專案只需要在最上層的資料夾做一次，不要每個子資料夾都各做一次。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
+      <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機
+      </div>
+      <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git init -b main
+Initialized empty Git repository in /Users/你/Desktop/demo/.git/</pre>
+    </div>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
+      <div style="font-size:17px;color:#3A443E;">不要在使用者根目錄（像 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">~/Desktop</code>）直接執行 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git init</code>，會把整個桌面都變成追蹤範圍。先 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">cd</code> 進專案自己的資料夾再 init。</div>
+    </div>
+  </section>
+
+  <section id="u3" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">03</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">三個區域：工作目錄、暫存區、倉庫</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">改動要先放進暫存區，才能存進倉庫，中間隔著你自己按下的確認動作。</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;">
+      <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-radius:10px;padding:18px;background:#FFFFFF;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">工作目錄</div>
+        <div style="font-size:17px;font-weight:600;">你電腦上看到的檔案</div>
+        <div style="font-size:17px;color:#4A554E;">正在改的東西，Git 還沒開始管它。</div>
+      </div>
+      <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-radius:10px;padding:18px;background:#FFFFFF;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">暫存區</div>
+        <div style="font-size:17px;font-weight:600;">git add 之後放的地方</div>
+        <div style="font-size:17px;color:#4A554E;">打包好、準備存檔，但還沒真的存下去。</div>
+      </div>
+      <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-radius:10px;padding:18px;background:#FFFFFF;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">倉庫</div>
+        <div style="font-size:17px;font-weight:600;">git commit 之後存的地方</div>
+        <div style="font-size:17px;color:#4A554E;">正式存檔，變成一個回得去的版本。</div>
+      </div>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">後面兩個單元的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git add</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git commit</code> 就是分別對應這三個區域之間的兩個動作，先搞懂這張圖，後面的指令就不是死背了。</p>
+  </section>
+
+  <div style="display:flex;align-items:baseline;gap:14px;">
+    <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">CH 2 · 記錄每一次改變</div>
+    <div style="flex:1;height:1px;background:#DFE3DA;"></div>
+  </div>
+
+  <section id="u4" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">04</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git status：現在是什麼狀態</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">不確定現在改了什麼、進度到哪，永遠先打 git status。</p>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">這個指令只是「看」，不會改變任何東西，隨時打都安全。養成每做一步就看一次的習慣，比事後靠記憶猜好用。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
+      <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機
+      </div>
+      <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+	hello.py
+	memo.txt
+
+nothing added to commit but untracked files present (use "git add" to track)</pre>
+    </div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;">
+      <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:120px;">Untracked files</span><span>Git 還沒開始追蹤的新檔案，兩個都是剛建立、還沒 add 過。</span></li>
+      <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:120px;">No commits yet</span><span>這個倉庫還沒存過任何一個版本，是全新的。</span></li>
+    </ul>
+  </section>
+
+  <section id="u5" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">05</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git add：放進暫存區</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">git add 不是存檔，是把改動放進「準備存檔」的箱子裡。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
+      <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機
+      </div>
+      <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git add hello.py
+<span style="color:#5C6370;">$</span> git status --short
+A  hello.py
+?? memo.txt</pre>
+    </div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;">
+      <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:60px;">A</span><span><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">hello.py</code> 已經放進暫存區，準備存檔。</span></li>
+      <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:60px;">??</span><span><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">memo.txt</code> 還沒被 add，還停在工作目錄。</span></li>
+    </ul>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
+      <div style="font-size:17px;color:#3A443E;">習慣打 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git add .</code> 會把整個資料夾的東西一次全部加進去，包含不小心留在裡面的密碼、大檔案。剛開始學，一個一個檔名點名加比較安全，或是先寫好 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.gitignore</code>（單元 08）再用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">.</code>。</div>
+    </div>
+  </section>
+
+  <section id="u6" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">06</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git commit：正式存一個版本</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">git commit 才是真的存檔，而且一定要附一句話說這次改了什麼。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
+      <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機
+      </div>
+      <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git commit -m <span style="color:#98C379;">"Add hello.py"</span>
+<span style="color:#5C6370;">$</span> git log --oneline
+3ac9023 Add hello.py</pre>
+    </div>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
+      <div style="font-size:17px;color:#3A443E;">commit 訊息不要寫 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">"update"</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">"fix"</code> 這種看不出內容的話。半年後回頭找是哪一次改壞的，這句話是你唯一的線索。寫清楚「這次做了什麼」，不用寫「為什麼」。</div>
+    </div>
+  </section>
+
+  <section id="u7" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">07</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git log：看歷史</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">git log --oneline 一行一個版本，新的在最上面。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
+      <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機
+      </div>
+      <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git log --oneline
+679e158 Print a greeting twice
+3ac9023 Add hello.py</pre>
+    </div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;">
+      <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">679e158</span><span>每一行最前面這串英數字是這個版本的代號，之後要回到某個版本、或跟別人講「就是這一次改的」，靠這串代號指認。</span></li>
+    </ul>
+  </section>
+
+  <div style="display:flex;align-items:baseline;gap:14px;">
+    <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">CH 3 · 忽略與復原</div>
+    <div style="flex:1;height:1px;background:#DFE3DA;"></div>
+  </div>
+
+  <section id="u8" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">08</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">.gitignore：不想被記錄的檔案</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">把不想讓 Git 管的檔案名稱寫進 .gitignore，它們就不會再出現在 git status 裡。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
+      <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>.gitignore
+      </div>
+      <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;">__pycache__/
+*.log
+memo.txt</pre>
+      <div style="display:flex;gap:12px;padding:14px 18px;border-top:1px solid #DFE3DA;background:#FBFAF7;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">輸出</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git status --short 只剩 M hello.py 跟 ?? .gitignore，memo.txt 不再出現</span>
+      </div>
+    </div>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
+      <div style="font-size:17px;color:#3A443E;">.gitignore 只對「還沒被追蹤過」的檔案有效。如果一個檔案已經被 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git add</code> 或 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git commit</code> 過，寫進 .gitignore 也沒用，Git 還是會繼續追蹤它，要先用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git rm --cached 檔名</code> 把它從追蹤清單移除。</div>
+    </div>
+  </section>
+
+  <section id="u9" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">09</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">git restore：反悔怎麼辦</h2>
+    </div>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">改壞了、想變回上一次存檔的樣子，用 git restore 檔名，還沒 commit 的改動會直接消失。</p>
+    <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
+      <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>終端機
+      </div>
+      <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;"><span style="color:#5C6370;">$</span> git status --short
+ M hello.py
+?? .gitignore
+<span style="color:#5C6370;">$</span> git restore hello.py
+<span style="color:#5C6370;">$</span> git status --short
+?? .gitignore</pre>
+    </div>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;">
+      <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:120px;">restore 前後</span><span><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">M hello.py</code> 那行消失了，代表 hello.py 已經變回上一次 commit 時的樣子，剛才寫的東西真的不見了。</span></li>
+    </ul>
+    <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
+      <div style="font-size:17px;color:#3A443E;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git restore</code> 是真的把還沒 commit 的修改刪掉，刪掉就找不回來了。先用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git status</code> 或 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">git diff</code> 確認真的要丟掉這個檔案的改動，不確定就先別動。</div>
+    </div>
+  </section>
+
+  <div style="display:flex;align-items:baseline;gap:14px;">
+    <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">練習題</div>
+    <div style="flex:1;height:1px;background:#DFE3DA;"></div>
+  </div>
+
+  <p style="font-size:17px;color:#4A554E;text-wrap:pretty;">前四題各自對應前面幾個單元，最後一題把整個流程串起來，是這份筆記的大魔王題。每題都附「預期輸出」，自己跑完可以對答案，不用來問我對不對。</p>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 1</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">建立第一個倉庫</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">新建一個空資料夾，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">cd</code> 進去，執行 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git init -b main</code>，再打一次 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git status</code> 看看。</p>
+    <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git status 會顯示「On branch main」跟「No commits yet」，沒有任何檔案列出來（因為資料夾裡還沒有東西）</span>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 2</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">建立檔案並加進暫存區</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">在練習 1 的資料夾裡新增一個 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">notes.txt</code>，寫幾個字進去，用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git add notes.txt</code> 加進暫存區，再用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git status --short</code> 確認。</p>
+    <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git status --short 顯示 A  notes.txt</span>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 3</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">存第一個版本</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">把練習 2 加進暫存區的東西 commit 掉，訊息寫「Add notes.txt」，再用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git log --oneline</code> 看一次歷史。</p>
+    <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git log --oneline 顯示一行：一串英數字代號 + Add notes.txt</span>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 4</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">忽略一個檔案</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">新增一個 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">secret.log</code>（假裝是不想被記錄的檔案），寫一個 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code>，裡面加一行 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">*.log</code>，用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git status --short</code> 確認 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">secret.log</code> 有沒有出現。</p>
+    <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">git status --short 只看到 ?? .gitignore，secret.log 不會出現</span>
+    </div>
+  </section>
+
+  <section style="border:2px solid #1C2321;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FBFAF7;background:#1C2321;border-radius:6px;padding:2px 9px;letter-spacing:0.06em;">大魔王</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">從零開始跑完整套流程</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">新建一個資料夾，一次用到這份筆記教的每一件事：</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">01</span>
+        <span style="font-size:17px;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git init -b main</code>，建立倉庫。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">02</span>
+        <span style="font-size:17px;">建立兩個檔案：<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">main.py</code>（隨便寫幾行）跟 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">debug.log</code>（假裝是產生出來的紀錄檔）。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">03</span>
+        <span style="font-size:17px;">寫一個 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code>，排除 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">debug.log</code>。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">04</span>
+        <span style="font-size:17px;">把 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">main.py</code> 跟 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code> add 起來，commit 一次，訊息寫「Initial commit」。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">05</span>
+        <span style="font-size:17px;">修改 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">main.py</code> 隨便加一行，add、commit 第二次，訊息寫清楚這次改了什麼。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">06</span>
+        <span style="font-size:17px;">再改一次 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">main.py</code>，這次改完反悔，用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code> 復原，最後用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git log --oneline</code> 確認整個過程只留下兩個 commit，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">debug.log</code> 從頭到尾沒被追蹤過。</span>
+      </div>
+    </div>
+    <div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:8px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">大魔王提示</div>
+      <div style="font-size:17px;color:#3A443E;"><code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">.gitignore</code> 要在 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">debug.log</code> 被 add 之前寫好，順序顛倒的話單元 08 的坑會直接發生在你身上。</div>
+      <div style="font-size:17px;color:#3A443E;">第 6 步的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code> 只能救回「還沒 commit」的改動。如果不小心先 commit 了才想反悔，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git restore</code> 不是對的指令——這份筆記沒教怎麼救已經 commit 的東西，先想想看要不要另外問。</div>
+      <div style="font-size:17px;color:#3A443E;">結束時 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">git log --oneline</code> 應該剛好兩行，不多不少；如果變成三行，代表某一步 commit 了不該 commit 的東西。</div>
+    </div>
+  </section>
+
+  <footer style="text-align:center;color:#6B756E;font-size:16px;padding-top:16px;border-top:1px solid #DFE3DA;">Git 學習筆記 · 基本流程 · 持續更新</footer>
+
+</div>
+</body>
+</html>
