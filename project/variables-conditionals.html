@@ -47,7 +47,7 @@
       <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 2</div>
         <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">讓程式做選擇</div>
-        <div style="font-size:16px;color:#4A554E;">= 與 ==、輸入轉型、if/elif/else、and/or</div>
+        <div style="font-size:16px;color:#4A554E;">= 與 ==、input() 轉型、if/elif/else、and/or</div>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
           <a href="#u4" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">04</a>
           <a href="#u5" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">05</a>
@@ -212,7 +212,7 @@ Student_Name = <span style="color:#98C379;">"阿明"
   <section id="u5" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
     <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">05</span>
-      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">使用者輸入永遠是字串</h2>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">input() 回傳的永遠是字串</h2>
     </div>
     <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">input() 收到的一定是字串，要算數學就先用 int() 或 float() 轉過去。</p>
     <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">就算你輸入 100，Python 拿到的是「文字的 100」。文字不能跟數字做加減乘除，所以要先轉型。整數用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">int()</code>，有小數用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">float()</code>。</p>
@@ -268,9 +268,9 @@ e = c + DD
     <span style="color:#E5A575;">print</span>(<span style="color:#98C379;">"what???"</span>)</pre>
       <div style="display:flex;flex-direction:column;gap:6px;padding:14px 18px;border-top:1px solid #DFE3DA;background:#FBFAF7;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">
         <span style="color:#6B756E;">輸出</span>
-        <span>輸入 100 → SooooooooooGoooooooood</span>
-        <span>輸入 85 → GoooooooD Job</span>
-        <span>輸入 30 → what???</span>
+        <span>輸入 100 → 印出 100，再印出 SooooooooooGoooooooood</span>
+        <span>輸入 85 → 印出 85，再印出 GoooooooD Job</span>
+        <span>輸入 30 → 印出 30，再印出 what???</span>
       </div>
     </div>
     <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
@@ -333,7 +333,7 @@ attend = <span style="color:#E5A575;">int</span>(<span style="color:#E5A575;">in
       <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">09</span>
       <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">f-string：最推薦的組字串方式</h2>
     </div>
-    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">字串前面加一個 f，變數直接寫進 {}，Python 會自動幫你轉型。</p>
+    <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">字串前面加一個 f，變數直接寫進 {}，不管是什麼型別都能印出來。</p>
     <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">課堂上示範的是舊式的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">%s</code> / <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">%d</code> 寫法：要記哪個佔位符配哪種型別，還要照順序放。兩種都看得懂就好，自己寫用 f-string。</p>
     <div style="display:flex;flex-direction:column;gap:14px;">
       <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
@@ -357,6 +357,11 @@ A2 = <span style="color:#98C379;">"ava"
         </div>
       </div>
     </div>
+      <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
+        <div style="font-size:17px;color:#3A443E;">f-string 不會幫你檢查型別對不對——忘記把 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">input()</code> 轉型，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">f"{age}"</code> 照樣印得出來，不會報錯；換成舊式的 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">%d</code> 反而會直接噴 <strong>TypeError</strong>，等於幫你抓到忘記轉型這件事。</div>
+        <div style="font-size:17px;color:#3A443E;">小數也不會自動幫你捨去，<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">f"{0.1 + 0.2}"</code> 會印出 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">0.30000000000000004</code>，這是電腦存小數本來就有的誤差。想要顯示乾淨一點，可以寫 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#F1E2D8;border-radius:5px;padding:1px 6px;">f"{值:.2f}"</code> 指定小數位數。</div>
+      </div>
       <div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FFFFFF;display:flex;flex-direction:column;gap:6px;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">動手試</div>
         <div style="font-size:17px;color:#3A443E;">用 input() 問名字和分數，再用一行 f-string 印出「小美 的分數是 90」。</div>
@@ -382,7 +387,7 @@ A2 = <span style="color:#98C379;">"ava"
       <div style="display:flex;flex-wrap:wrap;gap:10px;">
         <div style="flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #DFE3DA;border-radius:9px;padding:12px 14px;background:#FFFFFF;"><span style="font-size:17px;flex:1;">指令面板（找功能）</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EEF0EC;border:1px solid #DFE3DA;border-bottom-width:2px;border-radius:6px;padding:2px 8px;flex:none;">⌘⇧P</span></div>
         <div style="flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #DFE3DA;border-radius:9px;padding:12px 14px;background:#FFFFFF;"><span style="font-size:17px;flex:1;">擴充套件面板</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EEF0EC;border:1px solid #DFE3DA;border-bottom-width:2px;border-radius:6px;padding:2px 8px;flex:none;">⌘⇧X</span></div>
-        <div style="flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #DFE3DA;border-radius:9px;padding:12px 14px;background:#FFFFFF;"><span style="font-size:17px;flex:1;">開啟 / 切換終端機</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EEF0EC;border:1px solid #DFE3DA;border-bottom-width:2px;border-radius:6px;padding:2px 8px;flex:none;">⌘ `</span></div>
+        <div style="flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #DFE3DA;border-radius:9px;padding:12px 14px;background:#FFFFFF;"><span style="font-size:17px;flex:1;">開啟 / 切換終端機</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EEF0EC;border:1px solid #DFE3DA;border-bottom-width:2px;border-radius:6px;padding:2px 8px;flex:none;">⌃ `</span></div>
         <div style="flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #DFE3DA;border-radius:9px;padding:12px 14px;background:#FFFFFF;"><span style="font-size:17px;flex:1;">存檔</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EEF0EC;border:1px solid #DFE3DA;border-bottom-width:2px;border-radius:6px;padding:2px 8px;flex:none;">⌘S</span></div>
         <div style="flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #DFE3DA;border-radius:9px;padding:12px 14px;background:#FFFFFF;"><span style="font-size:17px;flex:1;">整行註解 / 取消註解</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EEF0EC;border:1px solid #DFE3DA;border-bottom-width:2px;border-radius:6px;padding:2px 8px;flex:none;">⌘ /</span></div>
         <div style="flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #DFE3DA;border-radius:9px;padding:12px 14px;background:#FFFFFF;"><span style="font-size:17px;flex:1;">執行目前 cell（# %%）</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EEF0EC;border:1px solid #DFE3DA;border-bottom-width:2px;border-radius:6px;padding:2px 8px;flex:none;">⇧Enter</span></div>
@@ -400,6 +405,98 @@ A2 = <span style="color:#98C379;">"ava"
       </div>
     </section>
   </div>
+
+  <div style="display:flex;align-items:baseline;gap:14px;">
+    <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">練習題</div>
+    <div style="flex:1;height:1px;background:#DFE3DA;"></div>
+  </div>
+
+  <p style="font-size:17px;color:#4A554E;text-wrap:pretty;">前六題各自對應前面一個單元，寫完再往下一題。最後一題把整份筆記的東西兜在一起，是這份筆記的大魔王題。</p>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 1</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">變數與 print</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">設三個變數 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">x = 5</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">y = 3</code>、<code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">z = x + y</code>，用一行 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">print()</code> 把 x、y、z 都印出來。</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 2</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">常數命名</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">一杯咖啡原價 60 元，稅率固定 5%。用一個全大寫的變數存稅率，算出含稅價格並印出來。</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 3</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">輸入與轉型</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">input()</code> 問一個數字，轉成整數後判斷是不是等於 100，符合就印出「猜中了」。</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 4</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">if / elif / else 分級</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">input()</code> 問分數，90 以上印「優」，80 以上印「甲」，70 以上印「乙」，60 以上印「丙」，其他印「丁」。留意判斷順序。</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 5</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">and / or 組合條件</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">問身高（公分）和體重（公斤）。身高 >= 160 而且體重 >= 50，印「符合標準」；身高 >= 180 或者體重 >= 90，另外印「體型較大」。這兩個結果可能同時出現。</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 6</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">f-string 組字串</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">問姓名和年齡（年齡記得轉型），用一行 f-string 印出「OOO 今年 XX 歲」。</p>
+  </section>
+
+  <section style="border:2px solid #1C2321;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FBFAF7;background:#1C2321;border-radius:6px;padding:2px 9px;letter-spacing:0.06em;">大魔王</span>
+      <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">期末成績小系統</h2>
+    </div>
+    <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">寫一個小工具，一次用到這份筆記教的每一件事：</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">01</span>
+        <span style="font-size:17px;">用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">input()</code> 問學生姓名，再問段考分數（記得轉型）。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">02</span>
+        <span style="font-size:17px;">分數對應等第：90 以上「優」，80 以上「甲」，70 以上「乙」，60 以上「丙」，其他「丁」。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">03</span>
+        <span style="font-size:17px;">再用 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">input()</code> 問出席次數（記得轉型）。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">04</span>
+        <span style="font-size:17px;">分數 >= 85 的人，或是「分數 >= 70 而且出席次數 >= 15」的人，都要額外印出「符合獎學金申請資格」。</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:baseline;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">05</span>
+        <span style="font-size:17px;">最後用一行 f-string 印出：「OOO 的段考成績是 XX 分，等第是 OO」。</span>
+      </div>
+    </div>
+    <div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:8px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">大魔王提示</div>
+      <div style="font-size:17px;color:#3A443E;">elif 的判斷順序要顧好，順序排錯的話，95 分可能會先掉進「乙」。</div>
+      <div style="font-size:17px;color:#3A443E;">第 4 點的「符合資格」不是等第判斷的一部分，是另一個獨立的 if，因為它跟任何等第都可能同時成立。</div>
+      <div style="font-size:17px;color:#3A443E;">兩次 input() 拿到的都是字串，姓名不用轉，分數和出席次數要轉。</div>
+      <div style="font-size:17px;color:#3A443E;">最後那句只需要一行 f-string，變數直接放進 {} 就好，不用再用 + 拼字串。</div>
+    </div>
+  </section>
 
   <footer style="text-align:center;color:#6B756E;font-size:16px;padding-top:16px;border-top:1px solid #DFE3DA;">Python 學習筆記 · 變數與判斷式 · 持續更新</footer>
 
