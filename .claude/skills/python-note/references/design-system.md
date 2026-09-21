@@ -2,6 +2,17 @@
 
 這份文件是「怎麼把內容排成一份筆記」的所有規格。文字內容怎麼寫（用字、命名、驗算規則）在 `writing-style.md`，這裡只管排版跟 HTML。
 
+## 模板裡的兩個簡寫
+
+底下所有 HTML 模板用這兩個簡寫代替重複的字型宣告，**貼進 HTML 之前一定要展開成完整字串**：
+
+| 簡寫 | 展開成 |
+|---|---|
+| `{M}` | `font-family:'IBM Plex Mono',monospace` |
+| `{T}` | `font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif` |
+
+忘了展開的話，`{M}` 會原樣留在 `style` 屬性裡，瀏覽器直接忽略，字型會掉回預設值。`check-html.py` 會抓這個，看到就是忘了展開。
+
 ## 整體骨架（由上到下）
 
 一份筆記固定是這幾塊，順序不能變：
@@ -9,10 +20,13 @@
 1. **Header**：課程小標籤（eyebrow）+ 大標題 + 一句話說明這份筆記的固定節奏 + meta 列（單元數／預估時間／來源檔案）
 2. **學習地圖**：把整個主題拆成 2～4 個「章」，每章底下列出屬於它的單元編號，章跟章之間要有依賴順序（前面是後面的地基）
 3. **要背的只有這幾個**：從整份筆記裡挑出「沒背起來就打不出第一行」的形狀，最多 5 個，並且明講其他的都可以查
-4. **逐章逐單元內容**：章節分隔線 → 該章底下每個單元一個 section
-5. **附錄**（條件成立才加，見下方「附錄」一節）：程式卡住怎麼辦、怎麼讀錯誤訊息、常見錯誤訊息代表什麼、編輯器快捷鍵、名詞小辭典
-6. **練習題**（使用者要求才加）：對應每個單元的練習 + 最後一題大魔王
-7. **Footer**
+4. **這份筆記怎麼用**：虛線框，講三輪讀法（第一輪只讀重點跟坑、第二輪遮住輸出自己猜、第三輪關掉筆記寫練習題）
+5. **逐章逐單元內容**：章節分隔線 → 該章底下每個單元一個 section
+6. **附錄**（條件成立才加，見下方「附錄」一節）：程式卡住怎麼辦、怎麼讀錯誤訊息、常見錯誤訊息代表什麼、編輯器快捷鍵、名詞小辭典
+7. **練習題**（使用者要求才加）：對應每個單元的練習。**大魔王只有一題就放在練習題最後；超過一題要另開一個「大魔王」章節分隔線**，跟練習題分開
+8. **Footer**
+
+**這套骨架只適用「有學習順序的筆記」。** 純查詢用的小抄、對照表、參考卡（例如 `cheatsheet.html`）不要套——那種文件整份都是拿來查的，硬加「要背的只有這幾個」跟「這份筆記怎麼用」會自相矛盾。
 
 ## 每個「單元」內部固定節奏
 
@@ -123,12 +137,12 @@
 ```html
 <header style="display:flex;flex-direction:column;gap:12px;padding-bottom:26px;border-bottom:2px solid #1C2321;">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;letter-spacing:0.14em;text-transform:uppercase;color:#2F6280;font-weight:500;">{科目} 課程筆記 · 第 N 週</div>
-    <a href="index.html" style="font-family:'IBM Plex Mono',monospace;font-size:16px;flex:none;">← 目錄</a>
+    <div style="{M};font-size:16px;letter-spacing:0.14em;text-transform:uppercase;color:#2F6280;font-weight:500;">{科目} 課程筆記 · 第 N 週</div>
+    <a href="index.html" style="{M};font-size:16px;flex:none;">← 目錄</a>
   </div>
-  <h1 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1.12;letter-spacing:0.01em;text-wrap:balance;">{主題標題}</h1>
+  <h1 style="{T};font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1.12;letter-spacing:0.01em;text-wrap:balance;">{主題標題}</h1>
   <p style="font-size:19px;color:#4A554E;max-width:56ch;text-wrap:pretty;">從零開始也看得懂的版本。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的程式 → 執行結果 → 容易踩的坑</strong>。不用背，看懂再動手打一次就好。</p>
-  <div style="display:flex;flex-wrap:wrap;gap:10px 22px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;margin-top:6px;">
+  <div style="display:flex;flex-wrap:wrap;gap:10px 22px;{M};font-size:16px;color:#6B756E;margin-top:6px;">
     <span>N 個單元</span>
     <span>約 N 分鐘</span>
     <span>範圍：{涵蓋跟不涵蓋什麼}</span>
@@ -142,15 +156,15 @@
 
 ```html
 <section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;">
-  <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">先看這張學習地圖</h2>
+  <h2 style="{T};font-size:22px;font-weight:700;">先看這張學習地圖</h2>
   <p style="font-size:17px;color:#4A554E;">{一句話說明整個主題在回答什麼問題}。照順序讀，前面是後面的地基。</p>
   <div style="display:flex;flex-wrap:wrap;gap:14px;">
     <div style="flex:1 1 220px;min-width:0;border:1px solid #DFE3DA;border-top:4px solid #2F6280;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;background:#FBFAF7;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">CH 1</div>
-      <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:21px;font-weight:700;">{章名，動詞短語}</div>
+      <div style="{M};font-size:16px;color:#2F6280;">CH 1</div>
+      <div style="{T};font-size:21px;font-weight:700;">{章名，動詞短語}</div>
       <div style="font-size:16px;color:#4A554E;">{該章涵蓋的具體術語，逗號分隔}</div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
-        <a href="#u1" style="font-family:'IBM Plex Mono',monospace;font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">01</a>
+        <a href="#u1" style="{M};font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">01</a>
         <!-- 每個單元一個 -->
       </div>
     </div>
@@ -165,15 +179,7 @@
 
 放在學習地圖後面、第一個章節分隔線前面。讀者是在看到「26 個單元」那一刻產生「這麼多我記不住」的，要在那個位置就先擋下來。
 
-外框跟學習地圖同一套（白底、`#DFE3DA` 邊框、`border-radius:14px`、`padding:26px 24px`），內容依序是：
-
-1. h2 標題，固定寫「要背的只有這幾個，其他都用查的」
-2. 一句引言：先點出單元總數很多，再說真正要背的只有幾個，其他都可以查
-3. 每一項：編號徽章（跟單元徽章同一個樣式）+ 19px 粗體標題 + 一個**沒有 file-tab 的深色 `<pre>`**（`border-radius:9px`、`padding:16px 18px`）+ 一句 16px `#4A554E` 的說明
-4. 分隔線（`border-top:1px solid #E7EAE3`）後面接「這些放心去查，不用背」，列出明確的項目名稱
-5. 最後一個虛線框（`#B9C2BA` 虛線、`#FBFAF7` 底）寫「自我測試」，給一個關掉筆記就能自己驗證的動作
-
-**選哪幾項進來，規則很硬：**
+結構直接看下面的模板。**選哪幾項進來的規則很硬：**
 
 - **每一項都必須是「可以直接打出來的形狀」**，不能是知識點。知識點要包進形狀裡——寫 `k = int( input( "請輸入：" ) )`，不要寫「input() 回傳的是字串」。
 - **上限 5 個，沒有下限。** 只有 2 個就寫 2 個，不要湊數。湊到 5 個這一塊就退化成另一份小抄，整個作用就沒了。實際案例：Git 那份只有 2 項（`add`→`commit`→`push` 三步、`git status`），而且在引言裡明講「這一塊只有兩項，不是漏寫」。
@@ -182,14 +188,14 @@
 - 終端機指令的 `$` 提示字元一樣用 `#5C6370`。
 
 ```html
-<section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;"><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">要背的只有這幾個，其他都用查的</h2><p style="font-size:17px;color:#4A554E;text-wrap:pretty;">{引言：單元總數很多，但要背的只有幾個}</p><div style="display:flex;flex-direction:column;gap:16px;"><div style="display:flex;flex-direction:column;gap:8px;"><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">01</span><span style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:19px;font-weight:700;">{這一項的名字}</span></div><pre style="background:#21252B;color:#ABB2BF;padding:16px 18px;border-radius:9px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;">{可以直接打出來的形狀，依色票上色}</pre><p style="font-size:16px;color:#4A554E;text-wrap:pretty;">{一句說明，16px #4A554E}</p></div><!-- 每一項一個，最多 5 個 --></div><div style="border-top:1px solid #E7EAE3;padding-top:16px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">這些放心去查，不用背</div><div style="font-size:17px;color:#4A554E;text-wrap:pretty;">{明確列出可以查的項目名稱}</div></div><div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">自我測試</div><div style="font-size:17px;color:#3A443E;text-wrap:pretty;">{關掉筆記就能自己驗證的動作}</div></div></section>
+<section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;"><h2 style="{T};font-size:22px;font-weight:700;">要背的只有這幾個，其他都用查的</h2><p style="font-size:17px;color:#4A554E;text-wrap:pretty;">{引言：單元總數很多，但要背的只有幾個}</p><div style="display:flex;flex-direction:column;gap:16px;"><div style="display:flex;flex-direction:column;gap:8px;"><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;"><span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">01</span><span style="{T};font-size:19px;font-weight:700;">{這一項的名字}</span></div><pre style="background:#21252B;color:#ABB2BF;padding:16px 18px;border-radius:9px;overflow-x:auto;{M};font-size:16px;line-height:1.8;">{可以直接打出來的形狀，依色票上色}</pre><p style="font-size:16px;color:#4A554E;text-wrap:pretty;">{一句說明，16px #4A554E}</p></div><!-- 每一項一個，最多 5 個 --></div><div style="border-top:1px solid #E7EAE3;padding-top:16px;display:flex;flex-direction:column;gap:6px;"><div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">這些放心去查，不用背</div><div style="font-size:17px;color:#4A554E;text-wrap:pretty;">{明確列出可以查的項目名稱}</div></div><div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:6px;"><div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">自我測試</div><div style="font-size:17px;color:#3A443E;text-wrap:pretty;">{關掉筆記就能自己驗證的動作}</div></div></section>
 ```
 
 ### 章節分隔線
 
 ```html
 <div style="display:flex;align-items:baseline;gap:14px;">
-  <div style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">CH 1 · {章名}</div>
+  <div style="{T};font-size:26px;font-weight:700;">CH 1 · {章名}</div>
   <div style="flex:1;height:1px;background:#DFE3DA;"></div>
 </div>
 ```
@@ -201,8 +207,8 @@
 ```html
 <section id="u1" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
   <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-    <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">01</span>
-    <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:28px;font-weight:700;">{單元標題}</h2>
+    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">01</span>
+    <h2 style="{T};font-size:28px;font-weight:700;">{單元標題}</h2>
   </div>
 
   <p style="font-size:20px;line-height:1.6;font-weight:600;border-left:4px solid #2F6280;padding-left:16px;text-wrap:pretty;">{一句話重點}</p>
@@ -210,30 +216,30 @@
   <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">{白話解釋，可省略}</p>
 
   <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
-    <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+    <div style="display:flex;align-items:center;gap:9px;background:#F3F4F1;border-bottom:1px solid #DFE3DA;padding:9px 15px;{M};font-size:16px;color:#5B665F;">
       <span style="width:8px;height:8px;border-radius:50%;background:#2F6280;flex:none;"></span>{檔名 / 「參考範例」/ 「終端機」}
     </div>
-    <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;">{程式碼或終端機內容，依色票上色}</pre>
+    <pre style="background:#21252B;color:#ABB2BF;padding:20px 18px;overflow-x:auto;{M};font-size:16px;line-height:1.8;">{程式碼或終端機內容，依色票上色}</pre>
     <div style="display:flex;gap:12px;padding:14px 18px;border-top:1px solid #DFE3DA;background:#FBFAF7;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">輸出</span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">{實際執行結果，一字不漏，見 writing-style.md「輸出結果一定要親自驗算」}</span>
+      <span style="{M};font-size:16px;color:#6B756E;flex:none;">輸出</span>
+      <span style="{M};font-size:16px;color:#1C2321;">{實際執行結果，一字不漏，見 writing-style.md「輸出結果一定要親自驗算」}</span>
     </div>
   </div>
 
   <!-- 逐行解讀，可選 -->
   <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;color:#3A443E;">
-    <li style="display:flex;gap:12px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;min-width:88px;">{那一行程式}</span><span>{白話說明}</span></li>
+    <li style="display:flex;gap:12px;"><span style="{M};font-size:16px;color:#2F6280;flex:none;min-width:88px;">{那一行程式}</span><span>{白話說明}</span></li>
   </ul>
 
   <!-- 容易踩的坑，可選但建議每個會出錯的觀念都要有 -->
   <div style="border:1px solid #E6CDBE;background:#FBF1EA;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
+    <div style="{M};font-size:16px;color:#8A4520;letter-spacing:0.06em;">容易踩的坑</div>
     <div style="font-size:17px;color:#3A443E;">{會出現的錯誤訊息 + 為什麼}</div>
   </div>
 
   <!-- 動手試，可選，不附答案 -->
   <div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FFFFFF;display:flex;flex-direction:column;gap:6px;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">動手試</div>
+    <div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">動手試</div>
     <div style="font-size:17px;color:#3A443E;">{小題目}</div>
   </div>
 </section>
@@ -263,13 +269,13 @@
 ```html
 <section style="display:flex;flex-direction:column;gap:16px;">
   <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-    <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 1</span>
-    <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:24px;font-weight:700;">{練習題名}</h2>
+    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 1</span>
+    <h2 style="{T};font-size:24px;font-weight:700;">{練習題名}</h2>
   </div>
   <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">{題目敘述}</p>
   <div style="display:flex;gap:12px;align-items:baseline;border:1px solid #DFE3DA;border-radius:9px;padding:12px 16px;background:#FFFFFF;">
-    <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
-    <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">{輸入 60 → 63.0}</span>
+    <span style="{M};font-size:16px;color:#6B756E;flex:none;">預期輸出</span>
+    <span style="{M};font-size:16px;color:#1C2321;">{輸入 60 → 63.0}</span>
   </div>
 </section>
 ```
@@ -281,19 +287,19 @@
 ```html
 <section style="border:2px solid #1C2321;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;">
   <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-    <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FBFAF7;background:#1C2321;border-radius:6px;padding:2px 9px;letter-spacing:0.06em;">大魔王</span>
-    <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:26px;font-weight:700;">{題目名稱}</h2>
+    <span style="{M};font-size:16px;color:#FBFAF7;background:#1C2321;border-radius:6px;padding:2px 9px;letter-spacing:0.06em;">大魔王</span>
+    <h2 style="{T};font-size:26px;font-weight:700;">{題目名稱}</h2>
   </div>
   <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">寫一個小工具，一次用到這份筆記教的每一件事：</p>
   <div style="display:flex;flex-direction:column;gap:10px;">
     <div style="display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #E7EAE3;padding-bottom:10px;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;flex:none;">01</span>
+      <span style="{M};font-size:16px;color:#2F6280;flex:none;">01</span>
       <span style="font-size:17px;">{步驟敘述}</span>
     </div>
     <!-- 每個步驟一個，最後一個不用 border-bottom -->
   </div>
   <div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:8px;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">大魔王提示</div>
+    <div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">大魔王提示</div>
     <div style="font-size:17px;color:#3A443E;">{提示 1，只點出容易忽略的地方，不給答案}</div>
   </div>
 </section>
@@ -305,7 +311,7 @@
 
 ```html
 <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;">
-  <summary style="cursor:pointer;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary>
+  <summary style="cursor:pointer;padding:12px 18px;{M};font-size:16px;color:#2F6280;">參考解答（先自己寫，再點開對照）</summary>
   <div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;">
     <!-- 單元 section 裡的「範例程式碼框」：file-tab + 上色的 pre + 輸出列 -->
     <!-- 一兩句說明：為什麼這樣寫、寫反了會怎樣 -->

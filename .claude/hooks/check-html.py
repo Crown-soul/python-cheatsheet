@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""筆記 HTML 的自動檢查：標籤開合、殘留的 Markdown 反引號、內部連結。
+"""筆記 HTML 的自動檢查：標籤開合、殘留的 Markdown 反引號、內部連結、沒展開的模板簡寫。
 
 兩種用法：
   - PostToolUse hook：從 stdin 讀 JSON，只檢查剛被 Write/Edit 的 .html 檔。
@@ -16,6 +16,8 @@ TAGS = ["div", "section", "header", "footer", "ul", "ol", "li", "p", "h1", "h2",
         "details", "summary"]
 
 PRE_BLOCK = re.compile(r"<pre\b.*?</pre>", re.S)
+# design-system.md 的模板用 {M} / {T} 代替重複的 font-family，貼進 HTML 前要展開
+UNEXPANDED = re.compile(r"style=\"[^\"]*\{[MT]\}")
 # 反引號「成對包住文字」才算殘留；單獨一個 ` 是按鍵符號（⌃ `），不算
 STRAY_BACKTICK = re.compile(r"`[^\s`](?:[^`\n]*[^\s`])?`")
 
@@ -23,6 +25,10 @@ STRAY_BACKTICK = re.compile(r"`[^\s`](?:[^`\n]*[^\s`])?`")
 def check(path):
     problems = []
     content = open(path, encoding="utf-8").read()
+
+    for m in UNEXPANDED.finditer(content):
+        problems.append(f"style 屬性裡有沒展開的模板簡寫 {m.group(0)[-3:]}，"
+                        f"要換成完整的 font-family（見 design-system.md 開頭的對照表）")
 
     for tag in TAGS:
         opens = len(re.findall(rf"<{tag}(?:\s[^>]*)?>", content))
