@@ -8,10 +8,11 @@
 
 1. **Header**：課程小標籤（eyebrow）+ 大標題 + 一句話說明這份筆記的固定節奏 + meta 列（單元數／預估時間／來源檔案）
 2. **學習地圖**：把整個主題拆成 2～4 個「章」，每章底下列出屬於它的單元編號，章跟章之間要有依賴順序（前面是後面的地基）
-3. **逐章逐單元內容**：章節分隔線 → 該章底下每個單元一個 section
-4. **附錄**（條件成立才加，見下方「附錄」一節）：程式卡住怎麼辦、怎麼讀錯誤訊息、常見錯誤訊息代表什麼、編輯器快捷鍵、名詞小辭典
-5. **練習題**（使用者要求才加）：對應每個單元的練習 + 最後一題大魔王
-6. **Footer**
+3. **要背的只有這幾個**：從整份筆記裡挑出「沒背起來就打不出第一行」的形狀，最多 5 個，並且明講其他的都可以查
+4. **逐章逐單元內容**：章節分隔線 → 該章底下每個單元一個 section
+5. **附錄**（條件成立才加，見下方「附錄」一節）：程式卡住怎麼辦、怎麼讀錯誤訊息、常見錯誤訊息代表什麼、編輯器快捷鍵、名詞小辭典
+6. **練習題**（使用者要求才加）：對應每個單元的練習 + 最後一題大魔王
+7. **Footer**
 
 ## 每個「單元」內部固定節奏
 
@@ -159,6 +160,30 @@
 ```
 
 章名要跟現有筆記同一套語氣：**動詞開頭的短句**，例如「把資料存起來」「讓程式做選擇」「建立一個倉庫」。不要用「基礎觀念」「進階應用」這種空泛分類詞。
+
+### 要背的只有這幾個
+
+放在學習地圖後面、第一個章節分隔線前面。讀者是在看到「26 個單元」那一刻產生「這麼多我記不住」的，要在那個位置就先擋下來。
+
+外框跟學習地圖同一套（白底、`#DFE3DA` 邊框、`border-radius:14px`、`padding:26px 24px`），內容依序是：
+
+1. h2 標題，固定寫「要背的只有這幾個，其他都用查的」
+2. 一句引言：先點出單元總數很多，再說真正要背的只有幾個，其他都可以查
+3. 每一項：編號徽章（跟單元徽章同一個樣式）+ 19px 粗體標題 + 一個**沒有 file-tab 的深色 `<pre>`**（`border-radius:9px`、`padding:16px 18px`）+ 一句 16px `#4A554E` 的說明
+4. 分隔線（`border-top:1px solid #E7EAE3`）後面接「這些放心去查，不用背」，列出明確的項目名稱
+5. 最後一個虛線框（`#B9C2BA` 虛線、`#FBFAF7` 底）寫「自我測試」，給一個關掉筆記就能自己驗證的動作
+
+**選哪幾項進來，規則很硬：**
+
+- **每一項都必須是「可以直接打出來的形狀」**，不能是知識點。知識點要包進形狀裡——寫 `k = int( input( "請輸入：" ) )`，不要寫「input() 回傳的是字串」。
+- **上限 5 個，沒有下限。** 只有 2 個就寫 2 個，不要湊數。湊到 5 個這一塊就退化成另一份小抄，整個作用就沒了。實際案例：Git 那份只有 2 項（`add`→`commit`→`push` 三步、`git status`），而且在引言裡明講「這一塊只有兩項，不是漏寫」。
+- **判準是「沒背起來就打不出第一行」**，不是「重要」。重要的東西很多，打不出第一行的很少。
+- **跟附錄的檢查清單分工要清楚**：這一塊是**打字之前**要會的形狀，附錄的「寫完自己檢查一遍」是**寫完之後**要核對的坑。兩個都是清單，但用的時機不同，不要互相重複。
+- 終端機指令的 `$` 提示字元一樣用 `#5C6370`。
+
+```html
+<section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;"><h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">要背的只有這幾個，其他都用查的</h2><p style="font-size:17px;color:#4A554E;text-wrap:pretty;">{引言：單元總數很多，但要背的只有幾個}</p><div style="display:flex;flex-direction:column;gap:16px;"><div style="display:flex;flex-direction:column;gap:8px;"><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">01</span><span style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:19px;font-weight:700;">{這一項的名字}</span></div><pre style="background:#21252B;color:#ABB2BF;padding:16px 18px;border-radius:9px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.8;">{可以直接打出來的形狀，依色票上色}</pre><p style="font-size:16px;color:#4A554E;text-wrap:pretty;">{一句說明，16px #4A554E}</p></div><!-- 每一項一個，最多 5 個 --></div><div style="border-top:1px solid #E7EAE3;padding-top:16px;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">這些放心去查，不用背</div><div style="font-size:17px;color:#4A554E;text-wrap:pretty;">{明確列出可以查的項目名稱}</div></div><div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:6px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;letter-spacing:0.06em;">自我測試</div><div style="font-size:17px;color:#3A443E;text-wrap:pretty;">{關掉筆記就能自己驗證的動作}</div></div></section>
+```
 
 ### 章節分隔線
 
