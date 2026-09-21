@@ -219,3 +219,24 @@ __marimo__/
 
 # macOS
 .DS_Store
+
+# 金鑰與憑證（標準 Python 範本沒涵蓋到的）
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.json
+secrets.yaml
+token.txt
+service-account*.json
+config.local.*
+
+# 本機資料庫
+*.sqlite
+*.sqlite3
+*.db
+
+# 老師的教材：別人的著作，不要放進公開 repo
+# 要備份請用私有 repo 或雲端硬碟
+teacher/
+課堂檔案/
