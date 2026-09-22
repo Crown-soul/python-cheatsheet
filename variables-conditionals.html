@@ -14,6 +14,11 @@
   a:hover{color:#1C2321;}
   pre{margin:0;}
   h1,h2,h3,p,ul,ol{margin:0;}
+  /* 中文內文平均分散對齊（左右對齊）。
+     程式碼區塊、輸出列、mono 標籤維持靠左——那些地方對齊會把字母拉開，反而難讀。
+     justify 不影響段落最後一行，所以單行段落看起來跟原本一樣。 */
+  p,div[style^="font-size:17px;color:#3A443E"]{text-align:justify;}
+  pre,code{text-align:left;}
 </style>
 </head>
 <body>
@@ -25,7 +30,7 @@
       <a href="index.html" style="font-family:'IBM Plex Mono',monospace;font-size:16px;flex:none;">← 目錄</a>
     </div>
     <h1 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1.12;letter-spacing:0.01em;text-wrap:balance;">變數與判斷式</h1>
-    <p style="font-size:19px;color:#4A554E;max-width:56ch;text-wrap:pretty;">從零開始也看得懂的版本。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的程式 → 執行結果 → 容易踩的坑</strong>。不用背，看懂再動手打一次就好。</p>
+    <p style="font-size:19px;color:#4A554E;max-width:34em;text-wrap:pretty;text-align:left;">從零開始也看得懂的版本。每個單元都是同一個順序：<strong style="color:#1C2321;"><span style="white-space:nowrap;">一句話重點</span> → <span style="white-space:nowrap;">白話解釋</span> → <span style="white-space:nowrap;">可以照打的程式</span> → <span style="white-space:nowrap;">執行結果</span> → <span style="white-space:nowrap;">容易踩的坑</span></strong>。不用背，看懂再動手打一次就好。</p>
     <div style="display:flex;flex-wrap:wrap;gap:10px 22px;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#6B756E;margin-top:6px;">
       <span>9 個單元</span>
       <span>約 25 分鐘</span>
@@ -387,11 +392,11 @@ A2 = <span style="color:#98C379;">"ava"
     <section style="display:flex;flex-direction:column;gap:14px;">
       <h2 style="font-family:'Barlow Semi Condensed','Noto Sans TC',sans-serif;font-size:22px;font-weight:700;">看到這些錯誤代表什麼</h2>
       <div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;">
-        <div style="display:flex;gap:16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;min-width:118px;">SyntaxError</span><span style="font-size:17px;">語法寫錯：漏冒號、漏括號、if 後面只打一個 =。</span></div>
-        <div style="display:flex;gap:16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;min-width:118px;">TypeError</span><span style="font-size:17px;">型別不合：字串和數字直接相加。</span></div>
-        <div style="display:flex;gap:16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;min-width:118px;">ValueError</span><span style="font-size:17px;">型別對但內容不能轉：int("八")。</span></div>
-        <div style="display:flex;gap:16px;padding:14px 18px;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;min-width:118px;">NameError</span><span style="font-size:17px;">用到還沒定義的變數，或名字打錯字、大小寫不一致。</span></div>
-        <div style="display:flex;gap:16px;padding:14px 18px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:none;min-width:118px;">IndentationError</span><span style="font-size:17px;">縮排不對：if 下一行忘了縮進去，或空格數不一致。</span></div>
+        <div style="display:flex;gap:16px;padding:14px 18px;flex-wrap:wrap;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:1 1 118px;">SyntaxError</span><span style="font-size:17px;flex:3 1 280px;">語法寫錯：漏冒號、漏括號、if 後面只打一個 =。</span></div>
+        <div style="display:flex;gap:16px;padding:14px 18px;flex-wrap:wrap;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:1 1 118px;">TypeError</span><span style="font-size:17px;flex:3 1 280px;">型別不合：字串和數字直接相加。</span></div>
+        <div style="display:flex;gap:16px;padding:14px 18px;flex-wrap:wrap;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:1 1 118px;">ValueError</span><span style="font-size:17px;flex:3 1 280px;">型別對但內容不能轉：int("八")。</span></div>
+        <div style="display:flex;gap:16px;padding:14px 18px;flex-wrap:wrap;border-bottom:1px solid #E7EAE3;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:1 1 118px;">NameError</span><span style="font-size:17px;flex:3 1 280px;">用到還沒定義的變數，或名字打錯字、大小寫不一致。</span></div>
+        <div style="display:flex;gap:16px;padding:14px 18px;flex-wrap:wrap;"><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#8A4520;flex:1 1 118px;">IndentationError</span><span style="font-size:17px;flex:3 1 280px;">縮排不對：if 下一行忘了縮進去，或空格數不一致。</span></div>
       </div>
     </section>
 

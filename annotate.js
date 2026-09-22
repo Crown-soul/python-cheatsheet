@@ -171,14 +171,14 @@
     panel.dataset.mnUi = "1";
     document.body.appendChild(panel);
 
-    chip = el("button", "position:absolute;z-index:10000;display:none;" + BTN_P + "padding:6px 12px;font-size:15px;box-shadow:0 2px 10px rgba(28,35,33,.25);");
+    chip = el("button", "position:absolute;z-index:10000;display:none;" + BTN_P + "padding:6px 12px;font-size:16px;box-shadow:0 2px 10px rgba(28,35,33,.25);");
     chip.id = "mn-chip";
     chip.textContent = "＋ 筆記";
     document.body.appendChild(chip);
 
     fab = el("button", "position:fixed;right:18px;bottom:18px;z-index:9998;width:52px;height:52px;border-radius:50%;" +
       "border:1px solid #DFE3DA;background:#FFFFFF;color:#2F6280;cursor:pointer;box-shadow:0 4px 16px rgba(28,35,33,.16);" +
-      MONO + ";font-size:15px;font-weight:600;");
+      MONO + ";font-size:16px;font-weight:600;");
     fab.id = "mn-fab";
     document.body.appendChild(fab);
 
@@ -260,7 +260,7 @@
     panel.innerHTML = "";
     var head = el("div", "display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid #DFE3DA;flex:none;");
     head.appendChild(el("div", "font:700 19px 'Barlow Semi Condensed','Noto Sans TC',sans-serif;flex:1;", "我的筆記"));
-    var cnt = el("span", MONO + ";font-size:15px;color:#6B756E;", String(notes.length));
+    var cnt = el("span", MONO + ";font-size:16px;color:#6B756E;", String(notes.length));
     head.appendChild(cnt);
     var x = el("button", BTN + "padding:4px 10px;", "✕");
     x.addEventListener("click", closePanel);
@@ -271,7 +271,7 @@
     panel.appendChild(body);
 
     if (editing) {
-      body.appendChild(el("div", MONO + ";font-size:15px;color:#6B756E;letter-spacing:.06em;", "你框起來的文字"));
+      body.appendChild(el("div", MONO + ";font-size:16px;color:#6B756E;letter-spacing:.06em;", "你框起來的文字"));
       quoteBox = el("blockquote", "margin:0;border-left:4px solid #2F6280;background:#FBFAF7;padding:12px 14px;" +
         "font-size:16px;line-height:1.6;color:#3A443E;max-height:170px;overflow-y:auto;border-radius:0 8px 8px 0;",
         esc(editing.quote));
@@ -280,7 +280,7 @@
         body.appendChild(el("div", "border:1px solid #E6CDBE;background:#FBF1EA;border-radius:8px;padding:10px 12px;font-size:16px;color:#8A4520;",
           "原文已變動，這段在頁面上找不到了。筆記還留著，要刪要留你決定。"));
       }
-      body.appendChild(el("div", MONO + ";font-size:15px;color:#6B756E;letter-spacing:.06em;margin-top:4px;", "我的備註"));
+      body.appendChild(el("div", MONO + ";font-size:16px;color:#6B756E;letter-spacing:.06em;margin-top:4px;", "我的備註"));
       textarea = el("textarea", null);
       textarea.value = editing.body || "";
       textarea.placeholder = "寫下你的想法、看不懂的地方、跟其他單元的關聯…";
@@ -317,7 +317,7 @@
         it.className = "mn-item";
         it.dataset.mnUi = "1";
         it.innerHTML =
-          '<div style="font-size:15px;color:#6B756E;border-left:3px solid ' + (n.orphan ? "#E6CDBE" : "#2F6280") +
+          '<div style="font-size:16px;color:#6B756E;border-left:3px solid ' + (n.orphan ? "#E6CDBE" : "#2F6280") +
           ';padding-left:9px;margin-bottom:7px;line-height:1.5;">' +
           esc(n.quote.length > 60 ? n.quote.slice(0, 60) + "…" : n.quote) +
           (n.orphan ? '<span style="color:#8A4520;"> · 原文已變動</span>' : "") + "</div>" +
@@ -333,12 +333,12 @@
     }
 
     var foot = el("div", "flex:none;border-top:1px solid #DFE3DA;padding:12px 18px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;");
-    var bOut = el("button", BTN + "padding:6px 12px;font-size:15px;", "匯出");
+    var bOut = el("button", BTN + "padding:6px 12px;font-size:16px;", "匯出");
     bOut.addEventListener("click", exportNotes);
-    var bIn = el("button", BTN + "padding:6px 12px;font-size:15px;", "匯入");
+    var bIn = el("button", BTN + "padding:6px 12px;font-size:16px;", "匯入");
     bIn.addEventListener("click", importNotes);
     foot.appendChild(bOut); foot.appendChild(bIn);
-    foot.appendChild(el("div", "font-size:15px;color:#6B756E;flex:1 1 100%;",
+    foot.appendChild(el("div", "font-size:16px;color:#6B756E;flex:1 1 100%;",
       "只存在這台裝置的瀏覽器裡，不會上傳，也不會進 Git。"));
     panel.appendChild(foot);
   }

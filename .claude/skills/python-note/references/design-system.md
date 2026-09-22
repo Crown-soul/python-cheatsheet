@@ -61,6 +61,24 @@
 - 正文：`'Source Sans 3','Noto Sans TC',-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif`
 - 程式碼 / 標籤 / meta 文字：`'IBM Plex Mono',monospace`
 
+### 正文對齊：兩端對齊，但程式碼跟英文長字串要跳過
+
+中文內文用 `text-align:justify`（左右對齊），讓每行填滿寬度、右緣切齊，讀起來比預設的左對齊參差不齊整齊。頁面外殼的 CSS 已經全域套用：
+
+```css
+p,div[style^="font-size:17px;color:#3A443E"]{text-align:justify;}
+pre,code{text-align:left;}
+```
+
+**兩種情況要手動排除**，不然中文字會被拉開、隔很遠、很難讀：
+
+1. **段落裡有超過 30 字元的行內 `<code>`**（完整的 traceback、長指令）：整段補 `text-align:left;`。可斷的空隙太少，justify 會硬把中文字撐開去填滿那行。
+2. **段落裡用 `white-space:nowrap` 包住不能斷行的詞組**（像節奏那句「一句話重點 → 白話解釋 → …」）：同樣補 `text-align:left;`。原因一樣——可斷點變少，justify 沒有地方分散空間，只好拉大字距。
+
+程式碼框（`<pre>`）、行內 `<code>`、附錄的簡易對照表兩欄列，一律維持 `left`，不要跟著兩端對齊——那些地方對齊只會把字母、底線隔得亂七八糟。
+
+判斷標準就一句話：**這段主要是中文語句嗎？是就兩端對齊；裡面卡著長英文/程式碼、或整段被 nowrap 鎖住嗎？是就改回靠左。**
+
 ### 字級（**全篇正文最小 16px，這是使用者的硬性要求，不能更小**）
 
 | 用途 | 字級 |
