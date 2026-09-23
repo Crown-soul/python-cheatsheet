@@ -61,6 +61,38 @@
     return null;
   }
 
+  /* locate() 的反向：Range 的邊界點（node + offset）→ 全域字元位置。
+     選取文字重複出現在頁面好幾處時，不能用 indexOf 找「第一個符合的位置」，
+     一定要用使用者實際選到的 DOM 節點反查，才不會存到別段的位置。 */
+  function globalOffset(idx, node, offset) {
+    if (node.nodeType === 3) {
+      for (var i = 0; i < idx.map.length; i++) {
+        if (idx.map[i].node === node) return idx.map[i].start + offset;
+      }
+      return -1;
+    }
+    // 邊界點落在元素上（offset 是第幾個子節點），不是文字節點本身：
+    // 找 offset 指到的那個子節點裡第一個文字節點；offset 等於子節點數時，
+    // 代表邊界在元素最後面，改抓最後一個文字節點的結尾。
+    var child = node.childNodes[offset];
+    var text = null, fromEnd = false;
+    if (child) {
+      text = child.nodeType === 3 ? child
+           : document.createTreeWalker(child, NodeFilter.SHOW_TEXT, null).nextNode();
+    } else {
+      var w = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null), t;
+      while ((t = w.nextNode())) text = t;
+      fromEnd = true;
+    }
+    if (!text) return -1;
+    for (var j = 0; j < idx.map.length; j++) {
+      if (idx.map[j].node === text) {
+        return idx.map[j].start + (fromEnd ? text.nodeValue.length : 0);
+      }
+    }
+    return -1;
+  }
+
   /* 找出這筆筆記在文件裡的位置。先用「前文＋引用＋後文」精準比對，
      找不到就退而求其次只比對引用本身。都找不到＝原文被改掉了。 */
   function findRange(note) {
@@ -215,14 +247,23 @@
   function startNew() {
     if (!pendingRange) return;
     var idx = buildIndex();
-    var quote = String(pendingRange).replace(/\s+/g, " ").trim();
-    var at = idx.full.replace(/\s+/g, " ").indexOf(quote);
-    var raw = idx.full.indexOf(String(pendingRange).trim());
-    var p = raw > 0 ? idx.full.slice(Math.max(0, raw - CTX), raw) : "";
-    var s = raw >= 0 ? idx.full.slice(raw + String(pendingRange).trim().length, raw + String(pendingRange).trim().length + CTX) : "";
+    /* 用選取範圍實際的 DOM 邊界換算全域位置，不能用 indexOf 找文字──
+       同樣的字在頁面上出現兩次以上時，indexOf 只會找到第一次，
+       存起來的前後文就會抄錯段落，這是實際發生過的 bug。 */
+    var gs = globalOffset(idx, pendingRange.startContainer, pendingRange.startOffset);
+    var ge = globalOffset(idx, pendingRange.endContainer, pendingRange.endOffset);
+    if (gs < 0 || ge < 0 || ge <= gs) { chip.style.display = "none"; return; }
+    var raw = idx.full.slice(gs, ge);
+    var trimmed = raw.replace(/^\s+/, "");
+    var lead = raw.length - trimmed.length;
+    trimmed = trimmed.replace(/\s+$/, "");
+    var qs = gs + lead, qe = qs + trimmed.length;
+    if (qe <= qs) { chip.style.display = "none"; return; }
+    var p = idx.full.slice(Math.max(0, qs - CTX), qs);
+    var s = idx.full.slice(qe, qe + CTX);
     editing = {
       id: "n" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      quote: String(pendingRange).trim(), prefix: p, suffix: s,
+      quote: trimmed, prefix: p, suffix: s,
       body: "", created: new Date().toISOString(), isNew: true
     };
     chip.style.display = "none";
