@@ -343,6 +343,33 @@ pre,code{text-align:left;}
 - 說明只講一件事：容易寫錯的地方（實際例子：等第判斷順序倒過來、兩個結果可以同時成立卻用了 `elif`）。
 - 解答裡的程式、指令、輸出都要實際跑過。Git 的解答直接貼真實終端機輸出，路徑換成佔位（`/Users/你/Desktop/demo/.git/`、`https://github.com/你/demo.git`）。
 
+### 追蹤表（trace table）
+
+單元裡「把中間過程印出來」那種範例（每一輪迴圈印兩三行，像 `t =`、`i =`、`加完 t =`），**原始輸出照舊一字不漏放在範例程式碼框的「輸出」欄位**（規則不變，那是真的終端機輸出，不能省略或改寫），但那種輸出是一長串同樣顏色、同樣字級的文字疊在一起，讀者要逐行自己配對「這是第幾輪」，一眼看不出規律。
+
+在「輸出」欄位後面**加一張小表格**，把同一組數字按「第幾輪」重新排過，不是取代原始輸出，是替它多開一個更好讀的視角：
+
+```html
+<p style="font-size:17px;color:#3A443E;text-wrap:pretty;">整理成表格更好對照——每一輪 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">t</code> 加之前跟加之後的值：</p>
+<div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;">
+  <div style="display:flex;flex-wrap:wrap;background:#F3F4F1;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
+    <span style="flex:1 1 60px;padding:8px 14px;">輪</span>
+    <span style="flex:1 1 60px;padding:8px 14px;">i</span>
+    <span style="flex:3 1 200px;padding:8px 14px;">t（加之前 → 加之後）</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;border-top:1px solid #E7EAE3;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#1C2321;">
+    <span style="flex:1 1 60px;padding:8px 14px;color:#2F6280;">1</span>
+    <span style="flex:1 1 60px;padding:8px 14px;">1</span>
+    <span style="flex:3 1 200px;padding:8px 14px;">0 → 1</span>
+  </div>
+  <!-- 每一輪一列，最左欄（輪次編號）用主色藍 #2F6280，其他欄位維持 #1C2321 -->
+</div>
+```
+
+- 欄位跟著程式實際印出來的變數走，不要自己發明欄位；三、四個變數以內都放同一張表，超過就代表這個例子太複雜，該拆成兩個單元而不是塞更大的表。
+- 這是**選用元件**，只在輸出本身「一長串、同顏色、要逐行配對才看得懂」時才加；輸出已經是一行一個結果（像 `1、2、3、4、5`）不需要這個，直接看輸出就夠快了。
+- 表格數字要跟輸出、跟程式邏輯三方一致，寫完務必照 `writing-style.md` 的規則實際跑一次程式核對，不要用心算推。
+
 ### 簡易對照表
 
 筆記裡的「建議 / 不建議」「狀況 / 指令 / 注意」這類表格，用 flex 排的列，不要用 `<table>`（手機寬度會爆版）。每個欄位要給 flex-basis（`flex:N 1 (N*40)px`），窄螢幕才會一欄一欄堆疊，寬螢幕維持並排。表頭列底色 `#F3F4F1`、mono 字；資料列用 `#E7EAE3` 細分隔線；「不建議」「注意」這種警示欄位的字用 `#8A4520`。
