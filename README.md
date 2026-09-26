@@ -10,17 +10,18 @@
 |---|---|
 | `index.html` | 目錄頁，含 Python 學習路線圖（每一站對應哪堂課、做完了沒） |
 | `variables-conditionals.html` | Python · 變數與判斷式（9 單元） |
-| `loops.html` | Python · 迴圈（26 單元） |
+| `loops.html` | Python · 迴圈（上）（單元 01～12） |
+| `loops-2.html` | Python · 迴圈（下）（單元 13～26） |
 | `git-basics.html` | Git · 基本流程（14 單元） |
 | `cheatsheet.html` | Python 小抄、環境問題排解 |
 | `practice/` | 課堂練習的原始 `.py` 檔，見 [`practice/README.md`](practice/README.md) |
-| `annotate.js` | 選字做筆記的功能，三份筆記共用 |
+| `annotate.js` | 選字做筆記的功能，所有筆記共用 |
 | `.claude/skills/python-note/` | 產生筆記用的 skill |
 
 
 ## 選字做筆記
 
-三份筆記（變數與判斷式、迴圈、Git）都能自己加註記：
+每份筆記（變數與判斷式、迴圈上下、Git）都能自己加註記：
 
 1. 在內文裡把文字選起來，下方會跳出「＋ 筆記」
 2. 點它，右邊滑出面板，上面是你框起來的原文，下面打你的備註

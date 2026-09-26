@@ -4,7 +4,8 @@
 只回報、不擋存檔（exit 0），規則見 references/writing-style.md「讀起來像人寫的」。
 程式碼框、行內 <code> 不檢查；「一句話重點」使用者決定先不改，另外計數不列出。
 
-用法：python3 .claude/skills/python-note/scripts/check-style.py 檔案1.html [檔案2.html ...]
+用法：python3 .claude/skills/python-note/scripts/check-style.py [--all] 檔案1.html [檔案2.html ...]
+  --all  一句話重點也一起檢查（新筆記、或使用者同意改重點句的筆記用這個）
 """
 import html
 import re
@@ -27,13 +28,14 @@ def plain(fragment):
     return html.unescape(re.sub(r"<[^>]+>", "", fragment))
 
 
-def check(path):
+def check(path, include_headlines=False):
     src = open(path, encoding="utf-8").read()
     headline_count = len(HEADLINE.findall(src))
     # 不檢查的部分換成等長空白，位置才對得上原檔
     masked = re.sub(r"<pre\b.*?</pre>|<code\b.*?</code>|<style\b.*?</style>|<script\b.*?</script>",
                     lambda m: " " * len(m.group(0)), src, flags=re.S)
-    masked = HEADLINE.sub(lambda m: " " * len(m.group(0)), masked)
+    if not include_headlines:
+        masked = HEADLINE.sub(lambda m: " " * len(m.group(0)), masked)
     heads = [(m.start(), plain(m.group(1)).strip()) for m in H2.finditer(src)]
 
     def where(pos):
@@ -62,8 +64,10 @@ def check(path):
 
 
 def main():
-    for path in sys.argv[1:]:
-        hits, headlines = check(path)
+    args = sys.argv[1:]
+    include = "--all" in args
+    for path in [a for a in args if a != "--all"]:
+        hits, headlines = check(path, include)
         print(f"== {path}：{len(hits)} 處")
         by_label = {}
         for h in hits:
@@ -75,7 +79,10 @@ def main():
             print(f"\n[{label}] {len(items)} 處。{items[0][3]}")
             for _, unit, context, _ in items:
                 print(f"  {unit}｜{context}")
-        print(f"\n（一句話重點 {headlines} 句沒有檢查，使用者決定先不改）\n")
+        if include:
+            print(f"\n（一句話重點 {headlines} 句一起檢查了）\n")
+        else:
+            print(f"\n（一句話重點 {headlines} 句沒有檢查；要一起檢查加 --all）\n")
     return 0
 
 
