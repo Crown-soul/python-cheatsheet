@@ -20,6 +20,8 @@ PRE_BLOCK = re.compile(r"<pre\b.*?</pre>", re.S)
 UNEXPANDED = re.compile(r"style=\"[^\"]*\{[MT]\}")
 # 反引號「成對包住文字」才算殘留；單獨一個 ` 是按鍵符號（⌃ `），不算
 STRAY_BACKTICK = re.compile(r"`[^\s`](?:[^`\n]*[^\s`])?`")
+SMALL_FONT = re.compile(r"font-size:\s*(?:1[0-5]|\d)px")
+UNIT_SECTION = re.compile(r'<section id="u\d+"')
 
 
 def check(path):
@@ -41,6 +43,14 @@ def check(path):
     for lineno, line in enumerate(text.splitlines(), 1):
         for m in STRAY_BACKTICK.finditer(line):
             problems.append(f"殘留的 Markdown 反引號：{m.group(0)}（改用 <code> 標籤，可用 grep -n 找位置）")
+
+    # 設計系統規定全篇最小 16px（使用者的硬性要求）
+    for m in sorted(set(SMALL_FONT.findall(content))):
+        problems.append(f"字級 {m} 小於 16px，全篇最小 16px（見 design-system.md「字級」）")
+
+    # 有單元的筆記要掛選字做筆記的功能；小抄、目錄頁沒有單元，不用掛
+    if UNIT_SECTION.search(content) and "annotate.js?v=" not in content:
+        problems.append("這份筆記有單元，但 </body> 前沒有 <script src=\"annotate.js?v=N\">")
 
     ids = set(re.findall(r'\bid="([^"]+)"', content))
     base = os.path.dirname(os.path.abspath(path))

@@ -8,7 +8,7 @@
 
 | 檔案 | 內容 |
 |---|---|
-| `index.html` | 目錄頁 |
+| `index.html` | 目錄頁，含 Python 學習路線圖（每一站對應哪堂課、做完了沒） |
 | `variables-conditionals.html` | Python · 變數與判斷式（9 單元） |
 | `loops.html` | Python · 迴圈（26 單元） |
 | `git-basics.html` | Git · 基本流程（14 單元） |
@@ -59,5 +59,5 @@ python3 .githooks/pre-commit
 
 ## 自動檢查
 
-- `.claude/hooks/check-html.py`：Claude Code 每次改 `.html` 就跑，檢查標籤開合、殘留的 Markdown 反引號、內部連結與錨點。手動跑：`python3 .claude/hooks/check-html.py 檔案.html`
+- `.claude/hooks/check-html.py`：Claude Code 每次改 `.html` 就跑，檢查標籤開合、殘留的 Markdown 反引號、內部連結與錨點、小於 16px 的字、筆記有沒有掛 `annotate.js`。手動跑：`python3 .claude/hooks/check-html.py 檔案.html`
 - `.githooks/pre-commit`：commit 前掃金鑰（見上）
