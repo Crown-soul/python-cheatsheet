@@ -173,7 +173,7 @@ pre,code{text-align:left;}
     <a href="index.html" style="{M};font-size:16px;flex:none;">← 目錄</a>
   </div>
   <h1 style="{T};font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1.12;letter-spacing:0.01em;text-wrap:balance;">{主題標題}</h1>
-  <p style="font-size:19px;color:#4A554E;max-width:34em;text-wrap:pretty;text-align:left;">從零開始也看得懂的版本。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的程式 → 執行結果 → 容易踩的坑</strong>。不用背，看懂再動手打一次就好。</p>
+  <p style="font-size:19px;color:#4A554E;max-width:34em;text-wrap:pretty;text-align:left;">從零開始也看得懂的版本。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的程式 → 執行結果 → 容易踩的坑</strong>。看懂之後，自己動手打一次。</p>
   <div style="display:flex;flex-wrap:wrap;gap:10px 22px;{M};font-size:16px;color:#6B756E;margin-top:6px;">
     <span>N 個單元</span>
     <span>約 N 分鐘</span>
@@ -235,7 +235,7 @@ pre,code{text-align:left;}
 - 終端機指令的 `$` 提示字元一樣用 `#5C6370`。
 
 ```html
-<section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;"><h2 style="{T};font-size:22px;font-weight:700;">要背的只有這幾個，其他都用查的</h2><p style="font-size:17px;color:#4A554E;text-wrap:pretty;">{引言：單元總數很多，但要背的只有幾個}</p><div style="display:flex;flex-direction:column;gap:16px;"><div style="display:flex;flex-direction:column;gap:8px;"><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;"><span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">01</span><span style="{T};font-size:19px;font-weight:700;">{這一項的名字}</span></div><pre style="background:#21252B;color:#ABB2BF;padding:16px 18px;border-radius:9px;overflow-x:auto;{M};font-size:16px;line-height:1.8;">{可以直接打出來的形狀，依色票上色}</pre><p style="font-size:16px;color:#4A554E;text-wrap:pretty;">{一句說明，16px #4A554E}</p></div><!-- 每一項一個，最多 5 個 --></div><div style="border-top:1px solid #E7EAE3;padding-top:16px;display:flex;flex-direction:column;gap:6px;"><div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">這些放心去查，不用背</div><div style="font-size:17px;color:#4A554E;text-wrap:pretty;">{明確列出可以查的項目名稱}</div></div><div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:6px;"><div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">自我測試</div><div style="font-size:17px;color:#3A443E;text-wrap:pretty;">{關掉筆記就能自己驗證的動作}</div></div></section>
+<section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;"><h2 style="{T};font-size:22px;font-weight:700;">要背的只有這幾個，其他都用查的</h2><p style="font-size:17px;color:#4A554E;text-wrap:pretty;">{引言：單元總數很多，但要背的只有幾個}</p><div style="display:flex;flex-direction:column;gap:16px;"><div style="display:flex;flex-direction:column;gap:8px;"><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;"><span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">01</span><span style="{T};font-size:19px;font-weight:700;">{這一項的名字}</span></div><pre style="background:#21252B;color:#ABB2BF;padding:16px 18px;border-radius:9px;overflow-x:auto;{M};font-size:16px;line-height:1.8;">{可以直接打出來的形狀，依色票上色}</pre><p style="font-size:16px;color:#4A554E;text-wrap:pretty;">{一句說明，16px #4A554E}</p></div><!-- 每一項一個，最多 5 個 --></div><div style="border-top:1px solid #E7EAE3;padding-top:16px;display:flex;flex-direction:column;gap:6px;"><div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">這些用到再查</div><div style="font-size:17px;color:#4A554E;text-wrap:pretty;">{明確列出可以查的項目名稱}</div></div><div style="border:1px dashed #B9C2BA;border-radius:10px;padding:16px 18px;background:#FBFAF7;display:flex;flex-direction:column;gap:6px;"><div style="{M};font-size:16px;color:#6B756E;letter-spacing:0.06em;">自我測試</div><div style="font-size:17px;color:#3A443E;text-wrap:pretty;">{關掉筆記就能自己驗證的動作}</div></div></section>
 ```
 
 ### 章節分隔線
@@ -282,7 +282,7 @@ pre,code{text-align:left;}
   <details style="border:1px solid #DFE3DA;border-radius:10px;background:#FFFFFF;">
     <summary style="cursor:pointer;padding:12px 18px;{M};font-size:16px;color:#2F6280;">底下發生什麼事（想深入再點開）</summary>
     <div style="padding:4px 18px 18px;display:flex;flex-direction:column;gap:14px;">
-      <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">{為什麼：比喻可以開頭，但一定要接下面的證明}</p>
+      <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">{為什麼：直接描述底下發生的事，接下面的程式證明}</p>
       <!-- 範例程式碼框（file-tab + pre + 輸出列），用 id()、type()、is 等實際證明 -->
     </div>
   </details>
@@ -401,7 +401,7 @@ pre,code{text-align:left;}
 </section>
 ```
 
-素材來自使用者自己的練習檔時，file-tab 直接用原始檔名，並在題目敘述加一句「這是你自己寫過的程式」——自己犯過的錯最容易記住。
+素材來自使用者自己的練習檔時，file-tab 直接用原始檔名，並在題目敘述寫「這是我初學時寫的 `檔名`」。筆記是公開的，寫「你自己寫的」別的讀者會看不懂；用「我」講真實經驗，是 `writing-style.md` 允許「我」出現的情況之一。
 
 ### 小專案
 
@@ -458,7 +458,7 @@ pre,code{text-align:left;}
 在「輸出」欄位後面**加一張小表格**，把同一組數字按「第幾輪」重新排過，不是取代原始輸出，是替它多開一個更好讀的視角：
 
 ```html
-<p style="font-size:17px;color:#3A443E;text-wrap:pretty;">整理成表格更好對照——每一輪 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">t</code> 加之前跟加之後的值：</p>
+<p style="font-size:17px;color:#3A443E;text-wrap:pretty;">整理成表格更好對照，每一輪 <code style="font-family:'IBM Plex Mono',monospace;font-size:16px;background:#EDF1F3;border-radius:5px;padding:1px 6px;">t</code> 加之前跟加之後的值：</p>
 <div style="border:1px solid #DFE3DA;border-radius:10px;overflow:hidden;background:#FFFFFF;">
   <div style="display:flex;flex-wrap:wrap;background:#F3F4F1;font-family:'IBM Plex Mono',monospace;font-size:16px;color:#5B665F;">
     <span style="flex:1 1 60px;padding:8px 14px;">輪</span>

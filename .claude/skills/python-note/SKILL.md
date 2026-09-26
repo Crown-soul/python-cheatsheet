@@ -47,7 +47,7 @@ description: 這個 python-cheatsheet 專案的課程筆記工作都用這個 sk
    - 發現 hook 沒觸發，先檢查 `.claude/settings.json` 和 `.claude/hooks/check-html.py` 還在不在。
    - 錨點 hook 會查，但**重新編號單元時要人工確認文字裡寫的「單元 NN」有跟著改**，那個 hook 抓不到。
 2. **每段範例程式碼或指令實際跑一次**，核對「輸出」欄位文字跟終端機印出的一模一樣（包含空格、換行順序），規則見 `references/writing-style.md`。
-3. **文字風格自我審查**：對照 `references/writing-style.md` 的贅字清單、抽象包裝詞，能刪就刪、能換成具體術語就換。
+3. **文字風格自我審查**：跑 `python3 .claude/skills/python-note/scripts/check-style.py 檔案.html`，把列出來的破折號、安撫語、贅字、概括說法改掉；再自己讀一遍新寫的文字，找腳本抓不到的對句跟自創比喻（規則見 `references/writing-style.md`「讀起來像人寫的」）。
 4. **and/or 語句加括號**：中文敘述跟程式碼都檢查一次。
 5. **有互動輸入的筆記，附錄有「程式卡住怎麼辦」跟「怎麼讀錯誤訊息」嗎**：沒有就補上。
 6. **段落有沒有被兩端對齊拉開**：含長 traceback、長指令的段落，跟含 `nowrap` 詞組的段落，都要補 `text-align:left;`（規則見 `design-system.md`「正文對齊」）。改完務必用瀏覽器（不是只看原始碼）滑過整頁確認，這種問題原始碼看不出來，只有實際渲染才看得到。
