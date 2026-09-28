@@ -15,16 +15,17 @@ description: 這個 python-cheatsheet 專案的課程筆記工作都用這個 sk
 
 | 任務 | 讀這些檔案 |
 |---|---|
-| 產生新筆記 / 幫既有筆記加練習題、小專案 | `references/design-system.md` + `references/writing-style.md` + `references/roadmap.md`（確認這份是第幾站），教材是雜亂原始素材的話再加 `references/source-material.md` |
-| 做跨章專案頁 | `references/roadmap.md` + `references/design-system.md`「跨章專案頁」+ `references/writing-style.md`「練習題」 |
-| 更新路線圖、問「我學到哪了／下一步學什麼」 | `references/roadmap.md`（先對照今天日期更新狀態，再同步 `index.html`） |
+| 產生新筆記 | `references/design-system.md` + `references/exercises.md` + `references/index-page.md`（要加目錄卡片）+ `references/writing-style.md` + `references/roadmap.md`（確認這份是第幾站），教材是雜亂原始素材的話再加 `references/source-material.md` |
+| 幫既有筆記加練習題、小專案、參考解答 | `references/exercises.md`（開頭列了哪幾樣要回 `design-system.md` 查）+ `references/writing-style.md`「練習題」「小專案與跨章專案」 |
+| 做跨章專案頁 | `references/roadmap.md` + `references/exercises.md`「跨章專案頁」 + `references/index-page.md` + `references/writing-style.md`「練習題」 |
+| 更新路線圖、問「我學到哪了／下一步學什麼」 | `references/roadmap.md`（先對照今天日期更新狀態，再照 `references/index-page.md` 同步 `index.html`） |
 | 做「課程不教、自學補」的節點 | 同「產生新筆記」，再加 `references/source-material.md`「課程不教的節點」 |
-| 把兩份以上既有的筆記合併成一份 | `references/source-material.md`「合併既有筆記」一節 + `references/design-system.md` |
+| 把兩份以上既有的筆記合併成一份 | `references/source-material.md`「合併既有筆記」一節 + `references/design-system.md` + `references/exercises.md` |
 | 只是局部修字、修 bug、加一兩個小區塊 | 只讀跟那個區塊有關的部分，不用整份讀完 |
 | 使用者貼程式碼問「這樣對嗎 / 我錯在哪」 | `references/review-workflow.md` |
 | 純粹聊筆記以外的問題（環境操作、觀念問答） | 不用讀模板，直接回答；如果牽涉到「程式卡住」這類問題，答完可以問要不要順手補進附錄 |
 
-不要每次任務都把五份參考文件整份讀完——批改程式碼用不到色票，修一個錯字用不到批改流程。看任務類型抓對應的檔案。
+不要每次任務都把七份參考文件整份讀完——批改程式碼用不到色票，修一個錯字用不到批改流程。看任務類型抓對應的檔案。
 
 ## 什麼時候要先問，什麼時候直接做
 
@@ -32,7 +33,7 @@ description: 這個 python-cheatsheet 專案的課程筆記工作都用這個 sk
 
 1. **主題範圍**：這次要涵蓋哪些具體觀念？對應路線圖第幾站？如果使用者是丟雜亂原始教材過來，範圍就是跑完 `references/source-material.md` 整理流程之後那份觀念清單，跟使用者確認過章節切法再開始寫。預估超過約 15 個單元，一起提出要在哪裡拆成上下兩份。
 2. **練習題、小專案**：每份都有。要問的是小專案的題目（先提一個能拿來用的小程式讓使用者選）。
-3. **練習題要不要附答案**：預設**不附**，只附預期輸出讓使用者自己驗證；使用者明確說「我要答案」「補上答案」，才用 `design-system.md` 的「參考解答」元件補進同一個檔案，解答裡的程式或指令一樣要實際跑過（實際發生過的流程：先給題目、使用者自己寫、寫完才補解答）。這一點沒有特別要求就不用問。
+3. **練習題要不要附答案**：預設**不附**，只附預期輸出讓使用者自己驗證；使用者明確說「我要答案」「補上答案」，才用 `exercises.md` 的「參考解答」元件補進同一個檔案，解答裡的程式或指令一樣要實際跑過（實際發生過的流程：先給題目、使用者自己寫、寫完才補解答）。這一點沒有特別要求就不用問。
 4. **輸出檔名與位置**：沒說的話，用該主題的英文當檔名放在根目錄（例如 `loops.html`），不要用中文檔名；如果目錄頁（`index.html`）已存在，記得同步加一張卡片，並在新筆記的 header 加回目錄的連結。
 
 **局部修改、修字、修 bug、加一兩個小區塊**這種範圍明確的小改動，不用每次都照上面四點問一輪——直接做，做完再回報改了哪裡。只有真的看不出使用者要什麼的時候才問。
