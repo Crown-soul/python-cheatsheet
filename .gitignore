@@ -236,6 +236,10 @@ config.local.*
 *.sqlite3
 *.db
 
+# Claude Code 的個人設定：只留在自己電腦上
+.claude/settings.local.json
+CLAUDE.local.md
+
 # 老師的教材：別人的著作，不要放進公開 repo
 # 要備份請用私有 repo 或雲端硬碟
 teacher/
