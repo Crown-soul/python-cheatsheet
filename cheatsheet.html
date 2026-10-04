@@ -14,6 +14,15 @@
   a:hover{color:#1C2321;}
   pre{margin:0;}
   h1,h2,h3,p,ul,ol{margin:0;}
+  /* 中文內文平均分散對齊（左右對齊）。
+     程式碼區塊、輸出列、mono 標籤維持靠左——那些地方對齊會把字母拉開，反而難讀。
+     justify 不影響段落最後一行，所以單行段落看起來跟原本一樣。 */
+  p,div[style^="font-size:17px;color:#3A443E"]{text-align:justify;}
+  pre,code{text-align:left;}
+  /* 一句話重點是短句，兩端對齊只會把字撐開，一律靠左。 */
+  p[style*="border-left:4px solid #2F6280"]{text-align:left;}
+  /* 文中的連結加底線，不只靠顏色辨認。 */
+  p a,li a,label a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
 </style>
 </head>
 <body>

@@ -17,6 +17,10 @@
      justify 不影響段落最後一行，所以單行段落看起來跟原本一樣。 */
   p,div[style^="font-size:17px;color:#3A443E"]{text-align:justify;}
   pre,code{text-align:left;}
+  /* 一句話重點是短句，兩端對齊只會把字撐開，一律靠左。 */
+  p[style*="border-left:4px solid #2F6280"]{text-align:left;}
+  /* 文中的連結加底線，不只靠顏色辨認。 */
+  p a,li a,label a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
   .entry{transition:border-color 0.15s ease,box-shadow 0.15s ease;}
   .entry:hover{border-color:#2F6280;box-shadow:0 4px 12px rgba(28,35,33,0.08);}
 </style>
