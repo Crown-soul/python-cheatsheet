@@ -248,3 +248,6 @@ teacher/
 # impeccable 設計工具的本機檔案
 PRODUCT.md
 .impeccable/
+
+# impeccable 的設計系統文件，只留本機
+DESIGN.md
