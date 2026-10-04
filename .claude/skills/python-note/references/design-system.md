@@ -34,7 +34,7 @@
 
 沒有「學完這份你能做到」區塊的是舊版筆記（目前只剩 `git-basics.html`），它們也沒有自我檢核、路線圖連結、「底下發生什麼事」「之後能拿來做什麼」，裡面的「大魔王」就是小專案。**局部修改舊版筆記時不用順手補這些**，使用者說要補才補。
 
-**單元數**：一份超過約 15 個單元，就在章節自然的分界點拆成「（上）」「（下）」兩份，**只能拆，不能刪內容**。拆開後兩份的 header 互相連結，目錄頁跟路線圖都要更新。
+**單元數**：一份超過約 15 個單元，就在章節自然的分界點拆開，**只能拆，不能刪內容**。拆成兩份用「（上）」「（下）」，三份以上用「（一）」「（二）」「（三）」。拆開後各份的 header 跟學習地圖底下互相連結，目錄頁跟路線圖都要更新。單元編號、練習編號跨份接續。**單一單元長到其他單元的兩倍以上**（例如裡面又用 h3 塞了另一個寫法），也要拆成兩個單元，各自有一句話重點。
 
 **這套骨架只適用「有學習順序的筆記」。** 純查詢用的小抄、對照表、參考卡（例如 `cheatsheet.html`）不要套——那種文件整份都是拿來查的，硬加「要背的只有這幾個」跟「這份筆記怎麼用」會自相矛盾。
 
@@ -79,7 +79,10 @@
 ```css
 p,div[style^="font-size:17px;color:#3A443E"]{text-align:justify;}
 pre,code{text-align:left;}
+p[style*="border-left:4px solid #2F6280"]{text-align:left;}
 ```
+
+第三行是「一句話重點」：它是 20px 粗體短句，兩端對齊在手機上只會把字撐開，所以外殼直接讓它靠左，不用每句手動補。
 
 **兩種情況要手動排除**，不然中文字會被拉開、隔很遠、很難讀：
 
@@ -154,6 +157,8 @@ pre,code{text-align:left;}
   h1,h2,h3,p,ul,ol{margin:0;}
   p,div[style^="font-size:17px;color:#3A443E"]{text-align:justify;}
   pre,code{text-align:left;}
+  p[style*="border-left:4px solid #2F6280"]{text-align:left;}
+  p a,li a,label a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
 </style>
 </head>
 <body>
@@ -204,7 +209,7 @@ pre,code{text-align:left;}
 ### 學習地圖（章卡片）
 
 ```html
-<section style="background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;">
+<section id="map" style="scroll-margin-top:20px;background:#FFFFFF;border:1px solid #DFE3DA;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;">
   <h2 style="{T};font-size:22px;font-weight:700;">先看這張學習地圖</h2>
   <p style="font-size:17px;color:#4A554E;">{一句話說明整個主題在回答什麼問題}。照順序讀，前面是後面的地基。</p>
   <div style="display:flex;flex-wrap:wrap;gap:14px;">
@@ -213,7 +218,7 @@ pre,code{text-align:left;}
       <div style="{T};font-size:21px;font-weight:700;">{章名，動詞短語}</div>
       <div style="font-size:16px;color:#4A554E;">{該章涵蓋的具體術語，逗號分隔}</div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
-        <a href="#u1" style="{M};font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:3px 9px;background:#FFFFFF;">01</a>
+        <a href="#u1" style="{M};font-size:16px;border:1px solid #DFE3DA;border-radius:7px;padding:8px 12px;background:#FFFFFF;">01</a>
         <!-- 每個單元一個 -->
       </div>
     </div>
@@ -246,17 +251,20 @@ pre,code{text-align:left;}
 <div style="display:flex;align-items:baseline;gap:14px;">
   <div style="{T};font-size:26px;font-weight:700;">CH 1 · {章名}</div>
   <div style="flex:1;height:1px;background:#DFE3DA;"></div>
+  <a href="#map" style="{M};font-size:16px;flex:none;">↑ 地圖</a>
 </div>
 ```
 
-同一個分隔線元件也用在附錄（標題改「附錄」）跟練習題（標題改「練習題」）之前。
+同一個分隔線元件也用在附錄（標題改「附錄」）、練習題（標題改「練習題」）、小專案（標題改「小專案」）之前。右邊的「↑ 地圖」連回學習地圖（`id="map"`）：一份筆記在手機上有兩三萬 px 長，讀到一半想跳去別的單元，不用一路滑回最上面。附錄的標題如果是包在上框線外層裡的那種寫法，就把標題跟「↑ 地圖」包成一列 `justify-content:space-between` 的 flex。
+
+學習地圖的單元編號按鈕 `padding:8px 12px`，高度約 44px，手機上手指點得到。單元標題列不加 `flex-wrap`、徽章加 `flex:none`，標題長的時候換行發生在標題裡，徽章不會自己掉到上一行。文中的連結（`p`、`li`、`label` 裡的 `<a>`）由外殼加底線，不只靠顏色辨認。
 
 ### 單元 section（完整版，含全部可選區塊）
 
 ```html
 <section id="u1" style="scroll-margin-top:20px;display:flex;flex-direction:column;gap:16px;">
-  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">01</span>
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">01</span>
     <h2 style="{T};font-size:28px;font-weight:700;">{單元標題}</h2>
   </div>
 

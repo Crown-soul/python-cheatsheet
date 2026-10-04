@@ -13,8 +13,8 @@
 
 ```html
 <section style="display:flex;flex-direction:column;gap:16px;">
-  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 1</span>
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">練習 1</span>
     <h2 style="{T};font-size:24px;font-weight:700;">{練習題名}</h2>
   </div>
   <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">{題目敘述}</p>
@@ -33,8 +33,8 @@
 
 ```html
 <section style="display:flex;flex-direction:column;gap:16px;">
-  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 N</span>
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">練習 N</span>
     <h2 style="{T};font-size:24px;font-weight:700;">預測輸出：{題名}</h2>
   </div>
   <div style="border:1px solid #DFE3DA;border-radius:11px;overflow:hidden;background:#FFFFFF;">
@@ -56,8 +56,8 @@
 
 ```html
 <section style="display:flex;flex-direction:column;gap:16px;">
-  <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
-    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;">練習 N</span>
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="{M};font-size:16px;color:#FFFFFF;background:#2F6280;border-radius:6px;padding:2px 9px;flex:none;">練習 N</span>
     <h2 style="{T};font-size:24px;font-weight:700;">找錯改錯：{題名}</h2>
   </div>
   <p style="font-size:17px;color:#3A443E;text-wrap:pretty;">{這段程式本來要做什麼}。它跑得出結果，但結果不對，找出錯在哪裡並改好。</p>
