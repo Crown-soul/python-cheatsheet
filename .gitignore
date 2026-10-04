@@ -244,3 +244,7 @@ CLAUDE.local.md
 # 要備份請用私有 repo 或雲端硬碟
 teacher/
 課堂檔案/
+
+# impeccable 設計工具的本機檔案
+PRODUCT.md
+.impeccable/
