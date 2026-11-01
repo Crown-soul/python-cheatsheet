@@ -3,7 +3,8 @@
 課程筆記的靜態網站（GitHub Pages 公開）。做筆記、出題、批改、路線圖一律走 `python-note` skill。
 
 ## 一定要守的
-- 這是**公開 repo**：老師的教材（.py、講義、投影片）不能 commit，只放 `teacher/` 或 `課堂檔案/`（已 gitignore）；使用者自己的練習放 `practice/`。
+- 這是**公開 repo**：老師的教材（.py、講義、投影片）不能 commit，只放 `0. 資料來源/`、`teacher/` 或 `課堂檔案/`（已 gitignore）；使用者自己的練習放 `practice/`。
+- `0. 資料來源/` 分成 `老師範例/`、`我的課堂練習/`、`過時/`。老師的檔名保留原編號（`4-8_找第一名.py`），筆記裡寫的 `4-8.py` 就是對應這個編號。
 - 不要主動 commit 或 push，改完問「要不要 commit」。
 - 金鑰、真實個資不進任何檔案；pre-commit 擋下來時不要自己加 `--no-verify`，先問。
 
