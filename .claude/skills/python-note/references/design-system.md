@@ -30,7 +30,7 @@
 9. **小專案**（模板在 `exercises.md`）：一份筆記一個，放在練習題後面，前面加一條「小專案」章節分隔線
 10. **自我檢核清單**：逐條對應第 2 項
 11. **Footer**
-12. **`</body>` 前一行**：`<script src="annotate.js?v=N"></script>`——選字做筆記的功能，所有筆記共用同一個檔案。新筆記照加，版號跟其他筆記一致；小抄類不加。**`?v=N` 的版號要記得帶**：改了 `annotate.js` 的內容，就把每一份引用它的筆記（`grep -l annotate.js *.html`）裡這個版號一起 +1，不然使用者瀏覽器裡快取的舊版 `annotate.js` 可能撐好一陣子才會換新——版號不同，瀏覽器才會當成不同資源重抓。
+12. **`</body>` 前一行**：`<script src="../assets/annotate.js?v=N"></script>`——選字做筆記的功能，所有筆記共用同一個檔案。新筆記照加，版號跟其他筆記一致；小抄類不加。**`?v=N` 的版號要記得帶**：改了 `annotate.js` 的內容，就把每一份引用它的筆記（`grep -l annotate.js notes/*.html reference/*.html`）裡這個版號一起 +1，不然使用者瀏覽器裡快取的舊版 `annotate.js` 可能撐好一陣子才會換新——版號不同，瀏覽器才會當成不同資源重抓。
 
 沒有「學完這份你能做到」區塊的是舊版筆記（目前只剩 `git-basics.html`），它們也沒有自我檢核、路線圖連結、「底下發生什麼事」「之後能拿來做什麼」，裡面的「大魔王」就是小專案。**局部修改舊版筆記時不用順手補這些**，使用者說要補才補。
 
@@ -177,7 +177,7 @@ p[style*="border-left:4px solid #2F6280"]{text-align:left;}
 <header style="display:flex;flex-direction:column;gap:12px;padding-bottom:26px;border-bottom:2px solid #1C2321;">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;">
     <div style="{M};font-size:16px;letter-spacing:0.14em;text-transform:uppercase;color:#2F6280;font-weight:500;">{科目} 課程筆記 · 第 N 週</div>
-    <a href="index.html" style="{M};font-size:16px;flex:none;">← 目錄</a>
+    <a href="../index.html" style="{M};font-size:16px;flex:none;">← 目錄</a>
   </div>
   <h1 style="{T};font-weight:700;font-size:clamp(34px,7vw,52px);line-height:1.12;letter-spacing:0.01em;text-wrap:balance;">{主題標題}</h1>
   <p style="font-size:19px;color:#4A554E;max-width:34em;text-wrap:pretty;text-align:left;">從零開始也看得懂的版本。每個單元都是同一個順序：<strong style="color:#1C2321;">一句話重點 → 白話解釋 → 可以照打的程式 → 執行結果 → 容易踩的坑</strong>。看懂之後，自己動手打一次。</p>
@@ -185,7 +185,7 @@ p[style*="border-left:4px solid #2F6280"]{text-align:left;}
     <span>N 個單元</span>
     <span>約 N 分鐘</span>
     <span>範圍：{涵蓋跟不涵蓋什麼}</span>
-    <a href="index.html#roadmap">路線圖第 N 站</a>
+    <a href="../index.html#roadmap">路線圖第 N 站</a>
   </div>
 </header>
 ```

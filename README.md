@@ -9,13 +9,9 @@
 | 檔案 | 內容 |
 |---|---|
 | `index.html` | 目錄頁，含 Python 學習路線圖（每一站對應哪堂課、做完了沒） |
-| `variables-conditionals.html` | Python · 變數與判斷式（9 單元） |
-| `loops.html` | Python · 迴圈（上）（單元 01～12） |
-| `loops-2.html` | Python · 迴圈（下）（單元 13～26） |
-| `git-basics.html` | Git · 基本流程（14 單元） |
-| `cheatsheet.html` | Python 小抄、環境問題排解 |
-| `practice/` | 課堂練習的原始 `.py` 檔，見 [`practice/README.md`](practice/README.md) |
-| `annotate.js` | 選字做筆記的功能，所有筆記共用 |
+| `notes/` | Python 課程筆記：變數與判斷式、迴圈（三份）、串列與元組（三份）、檔案處理 |
+| `reference/` | `git-basics.html`（Git 基本流程）、`cheatsheet.html`（Python 小抄、環境問題排解） |
+| `assets/annotate.js` | 選字做筆記的功能，所有筆記共用 |
 | `.claude/skills/python-note/` | 產生筆記用的 skill |
 
 
@@ -40,7 +36,7 @@
 
 - 金鑰、密碼、token 不要寫進任何檔案。要用的話放 `.env`（已經在 `.gitignore` 裡），程式用 `os.environ` 讀。
 - 作業不要用真實個資當測試值。
-- **老師的教材不要放進來**——那是別人的著作，公開散布不合適。要備份請用私有 repo 或雲端硬碟。`.gitignore` 已經擋掉 `teacher/` 和 `課堂檔案/` 兩個資料夾名稱。
+- **老師的教材不要放進來**——那是別人的著作，公開散布不合適。要備份請用私有 repo 或雲端硬碟。`.gitignore` 已經擋掉 `0. 資料來源/`、`teacher/` 和 `課堂檔案/`。
 
 ## 換一台電腦 clone 之後要跑一次
 
